@@ -1,9 +1,10 @@
 /// <reference path="jquery/index.d.ts" />
 /// <reference path="knockout/index.d.ts" />
+/// <reference path="utils.ts" />
 'use strict';
 
+import { utils } from "./utils";
 module com.sabrac.processer.login {
-    import { utils } from './utils';
     export class ScreenModel {
         self: any;
         userName: KnockoutObservable<string>;
@@ -34,9 +35,9 @@ module com.sabrac.processer.login {
 //                    alert('error');
 //                }
 //            });
-            com.sabrac.processer.utils.postData("loginService.do", dataObject).done(function(result) {
+            utils.postData("loginService.do", dataObject).done(function(result) {
                 window.location.href = "index.do";
-            }).reject(function(result) {
+            }).fail(function(result) {
                 alert("error");
             });
         }

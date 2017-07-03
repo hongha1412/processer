@@ -1,11 +1,10 @@
 /// <reference path="jquery/index.d.ts" />
-/// <reference path="knockout/index.d.ts" />
 
 //module com.sabrac.processer {
 //    export class utils {
 //        self: any;
 //
-//        constructor() {
+//        constructor(tmp: string) {
 //            this.self = this;
 //        }
 //
@@ -30,7 +29,7 @@
 //}
 
 export const utils = {
-   postData(url, data) {
+    postData(url, data): JQueryPromise<any> {
         var dfd = $.Deferred();
         $.ajax({
             url: url,
@@ -40,11 +39,12 @@ export const utils = {
             dataType: 'json',
             cache: false,
             success: function(result) {
-                return dfd.done(result);
+                dfd.done(result);
             },
             error: function(result) {
-                return dfd.reject(result);
+                dfd.reject(result);
             }
         });
-   } 
+        return dfd.promise();
+    }
 }

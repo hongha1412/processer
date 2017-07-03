@@ -1,11 +1,10 @@
 /// <reference path="jquery/index.d.ts" />
-/// <reference path="knockout/index.d.ts" />
 "use strict";
 //module com.sabrac.processer {
 //    export class utils {
 //        self: any;
 //
-//        constructor() {
+//        constructor(tmp: string) {
 //            this.self = this;
 //        }
 //
@@ -39,12 +38,13 @@ exports.utils = {
             dataType: 'json',
             cache: false,
             success: function (result) {
-                return dfd.done(result);
+                dfd.done(result);
             },
             error: function (result) {
-                return dfd.reject(result);
+                dfd.reject(result);
             }
         });
+        return dfd.promise();
     }
 };
 //# sourceMappingURL=utils.js.map

@@ -1,6 +1,8 @@
 /// <reference path="jquery/index.d.ts" />
 /// <reference path="knockout/index.d.ts" />
+/// <reference path="utils.ts" />
 'use strict';
+const utils_1 = require("./utils");
 var com;
 (function (com) {
     var sabrac;
@@ -34,9 +36,9 @@ var com;
                         //                    alert('error');
                         //                }
                         //            });
-                        com.sabrac.processer.utils.postData("loginService.do", dataObject).done(function (result) {
+                        utils_1.utils.postData("loginService.do", dataObject).done(function (result) {
                             window.location.href = "index.do";
-                        }).reject(function (result) {
+                        }).fail(function (result) {
                             alert("error");
                         });
                     }
