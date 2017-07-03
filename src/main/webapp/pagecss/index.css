@@ -1,0 +1,52 @@
+@CHARSET "UTF-8";
+#wrapper h1 {
+    font: normal 25px Helvetica, Arial, sans-serif;
+    letter-spacing: -0.05em;
+    line-height: 20px;
+    margin: 10px 0 30px;
+}
+
+#wrapper {
+    max-width: 650px;
+}
+
+#wrapper h1:before {
+    background: -webkit-linear-gradient(right, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    left: 0;
+}
+
+#wrapper h1:after {
+    background: -webkit-linear-gradient(left, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    right:0;
+}
+
+#wrapper h1:before,
+#wrapper h1:after {
+    content: "";
+    height: 1px;
+    position: absolute;
+    top: 50px;
+    width: 20%;
+}
+
+.header {
+    margin: 0 auto;
+    padding: 25px 0 0;
+    position: relative;
+    text-align: center;
+    text-shadow: 0 1px 0 #fff;
+    min-width: 280px;
+}
+
+.right_col {
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+.row {
+    min-width: 485px;
+}
+
+h1 img {
+    margin-bottom: 3px;
+}

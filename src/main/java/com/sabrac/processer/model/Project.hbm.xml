@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Jul 3, 2017 3:14:45 PM by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="processer" dynamic-insert="false" dynamic-update="false" mutable="true" name="com.sabrac.processer.model.Project" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="project">
+        <id name="pjId" type="java.lang.Integer">
+            <column name="pj_id"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="com.sabrac.processer.model.Member" embed-xml="true" fetch="select" insert="true" name="member" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="pj_asignee"/>
+        </many-to-one>
+        <many-to-one class="com.sabrac.processer.model.Status" embed-xml="true" fetch="select" insert="true" name="status" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="pj_status"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="pjName" optimistic-lock="true" type="string" unique="false">
+            <column name="pj_name" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="pjType" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="pj_type"/>
+        </property>
+        <property generated="never" lazy="false" name="pjCapacity" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="pj_capacity"/>
+        </property>
+        <property generated="never" lazy="false" name="pjReceivedate" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="pj_receivedate"/>
+        </property>
+        <property generated="never" lazy="false" name="pjSenddate" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="pj_senddate"/>
+        </property>
+        <property generated="never" lazy="false" name="pjDeadline" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="pj_deadline"/>
+        </property>
+        <property generated="never" lazy="false" name="pjComment" optimistic-lock="true" type="string" unique="false">
+            <column name="pj_comment"/>
+        </property>
+        <property generated="never" lazy="false" name="pjFlg" optimistic-lock="true" type="byte" unique="false">
+            <column name="pj_flg" not-null="true"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="feedbacks" optimistic-lock="true" sort="unsorted" table="feedback">
+            <key on-delete="noaction">
+                <column name="fb_p_id" not-null="true"/>
+            </key>
+            <one-to-many class="com.sabrac.processer.model.Feedback" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="projectMembers" optimistic-lock="true" sort="unsorted" table="project_member">
+            <key on-delete="noaction">
+                <column name="p_id" not-null="true"/>
+            </key>
+            <one-to-many class="com.sabrac.processer.model.ProjectMember" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Jul 3, 2017 3:14:45 PM by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="processer" dynamic-insert="false" dynamic-update="false" mutable="true" name="com.sabrac.processer.model.Status" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="status">
+        <id name="SId" type="java.lang.Integer">
+            <column name="s_id"/>
+            <generator class="identity"/>
+        </id>
+        <property generated="never" lazy="false" name="SType" optimistic-lock="true" type="int" unique="false">
+            <column name="s_type" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="SName" optimistic-lock="true" type="string" unique="false">
+            <column name="s_name"/>
+        </property>
+        <property generated="never" lazy="false" name="SCustom" optimistic-lock="true" type="string" unique="false">
+            <column name="s_custom"/>
+        </property>
+        <property generated="never" lazy="false" name="SFlg" optimistic-lock="true" type="byte" unique="false">
+            <column name="s_flg" not-null="true"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="projects" optimistic-lock="true" sort="unsorted" table="project">
+            <key on-delete="noaction">
+                <column name="pj_status"/>
+            </key>
+            <one-to-many class="com.sabrac.processer.model.Project" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

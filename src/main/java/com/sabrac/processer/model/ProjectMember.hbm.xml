@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Jul 3, 2017 3:14:45 PM by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="processer" dynamic-insert="false" dynamic-update="false" mutable="true" name="com.sabrac.processer.model.ProjectMember" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="project_member">
+        <id name="pmId" type="java.lang.Integer">
+            <column name="pm_id"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="com.sabrac.processer.model.Member" embed-xml="true" fetch="select" insert="true" name="member" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="m_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="com.sabrac.processer.model.Project" embed-xml="true" fetch="select" insert="true" name="project" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="p_id" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

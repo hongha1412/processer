@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Jul 3, 2017 3:14:45 PM by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="processer" dynamic-insert="false" dynamic-update="false" mutable="true" name="com.sabrac.processer.model.Member" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="member">
+        <id name="MId" type="java.lang.Integer">
+            <column name="m_id"/>
+            <generator class="identity"/>
+        </id>
+        <property generated="never" lazy="false" name="MName" optimistic-lock="true" type="string" unique="false">
+            <column name="m_name"/>
+        </property>
+        <property generated="never" lazy="false" name="MComment" optimistic-lock="true" type="string" unique="false">
+            <column name="m_comment"/>
+        </property>
+        <property generated="never" lazy="false" name="MFlg" optimistic-lock="true" type="byte" unique="false">
+            <column name="m_flg" not-null="true"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="projects" optimistic-lock="true" sort="unsorted" table="project">
+            <key on-delete="noaction">
+                <column name="pj_asignee"/>
+            </key>
+            <one-to-many class="com.sabrac.processer.model.Project" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="projectMembers" optimistic-lock="true" sort="unsorted" table="project_member">
+            <key on-delete="noaction">
+                <column name="m_id" not-null="true"/>
+            </key>
+            <one-to-many class="com.sabrac.processer.model.ProjectMember" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

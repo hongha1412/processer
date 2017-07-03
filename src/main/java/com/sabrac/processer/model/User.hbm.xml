@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Jul 3, 2017 3:14:45 PM by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="processer" dynamic-insert="false" dynamic-update="false" mutable="true" name="com.sabrac.processer.model.User" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="user">
+        <id name="UId" type="java.lang.Integer">
+            <column name="u_id"/>
+            <generator class="identity"/>
+        </id>
+        <property generated="never" lazy="false" name="UUsername" optimistic-lock="true" type="string" unique="false">
+            <column name="u_username" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="UPassword" optimistic-lock="true" type="string" unique="false">
+            <column name="u_password" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="URole" optimistic-lock="true" type="int" unique="false">
+            <column name="u_role" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="UFlg" optimistic-lock="true" type="byte" unique="false">
+            <column name="u_flg" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>
