@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="pagecss/index.css" type="text/css" />
   <script src="pagejs/index.js"></script>
 </head>
-<body style="background: #F7F7F7;">
+<body style="background: #F7F7F7; display: none;" data-bind="visible: true">
   <div id="wrapper">
     <section class="header">
       <h1><img src="images/Plimo_icon.ico" /> Project Processer</h1>
@@ -52,12 +52,11 @@
                     <td>
                       <button type="button" class="btn btn-success btn-xs" data-bind="text: pjType"></button>
                     </td>
-                    <td><a href="#" class="btn btn-primary btn-xs"><i
-                        class="fa fa-folder"></i> View </a> <a href="#"
-                      class="btn btn-info btn-xs hide"><i
-                        class="fa fa-pencil"></i> Edit </a> <a href="#"
-                      class="btn btn-danger btn-xs hide"><i
-                        class="fa fa-trash-o"></i> Delete </a></td>
+                    <td>
+                      <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a> 
+                      <a href="#" class="btn btn-info btn-xs hide"><i class="fa fa-pencil"></i> Edit </a> 
+                      <a href="#" class="btn btn-danger btn-xs hide"><i class="fa fa-trash-o"></i> Delete </a>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -68,10 +67,10 @@
           </div>
           <div class="clearfix"></div>
         </div>
-        <div class="pull-left bottom_control" data-bind="visible: isLoggedIn">
+        <div class="pull-left bottom_control" data-bind="visible: isLoggedIn()">
             <button type="button" class="btn btn-primary" data-bind="click: newProject">New Project</button>
         </div>
-        <div class="pull-right bottom_control" data-bind="visible: !isLoggedIn">
+        <div class="pull-right bottom_control" data-bind="visible: !isLoggedIn()">
           <button type="button" class="btn btn-link" data-bind="click: adminLogin">Admin Login</button>
         </div>
       </div>

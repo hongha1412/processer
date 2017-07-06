@@ -1,6 +1,5 @@
 /// <reference path="jquery/index.d.ts" />
 /// <reference path="knockout/index.d.ts" />
-/// <reference path="jquery.pnotify/index.d.ts" />
 /// <reference path="utils.ts" />
 'use strict';
 
@@ -72,8 +71,10 @@ module com.sabrac.processer {
 
     $(document).ready(function() {
         var screenModel = new IndexScreenModel();
+        $.blockUI();
         screenModel.startPage().done(function() {
-            ko.applyBindings(screenModel, $("#html_content")[0]); 
+            ko.applyBindings(screenModel, $("#html_content")[0]);
+            $.unblockUI(); 
         });
     });
 }

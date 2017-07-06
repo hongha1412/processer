@@ -1,5 +1,6 @@
 /// <reference path="jquery/index.d.ts" />
 /// <reference path="jquery.pnotify/index.d.ts" />
+/// <reference path="jquery.blockui/index.d.ts/" />
 
 module com.sabrac.processer {
 

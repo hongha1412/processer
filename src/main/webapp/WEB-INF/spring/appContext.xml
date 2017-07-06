@@ -15,6 +15,10 @@
         <property name="userDAO" ref="userDAO" />
     </bean>
 
+    <bean id="newProjectService" class="com.sabrac.processer.business.UserBusinessImpl">
+        <property name="userDAO" ref="userDAO" />
+    </bean>
+
     <bean id="userDAO" class="com.sabrac.processer.dao.UserDAOImpl">
         <constructor-arg>
             <ref bean="sessionFactory" />
