@@ -5,17 +5,17 @@
 
 
 interface KnockoutSubscribableFunctions<T> {
-    [key: string]: KnockoutBindingHandler | undefined;
+    [key: string]: KnockoutBindingHandler;
 
 	notifySubscribers(valueToWrite?: T, event?: string): void;
 }
 
 interface KnockoutComputedFunctions<T> {
-    [key: string]: KnockoutBindingHandler | undefined;
+    [key: string]: KnockoutBindingHandler;
 }
 
 interface KnockoutObservableFunctions<T> {
-    [key: string]: KnockoutBindingHandler | undefined;
+    [key: string]: KnockoutBindingHandler;
 
 	equalityComparer(a: any, b: any): boolean;
 }
@@ -35,7 +35,7 @@ interface KnockoutObservableArrayFunctions<T> {
     sort(compareFunction: (left: T, right: T) => number): KnockoutObservableArray<T>;
 
     // Ko specific
-    [key: string]: KnockoutBindingHandler | undefined;
+    [key: string]: KnockoutBindingHandler;
 
     replace(oldItem: T, newItem: T): void;
 
@@ -89,7 +89,7 @@ interface KnockoutComputed<T> extends KnockoutObservable<T>, KnockoutComputedFun
 interface KnockoutObservableArrayStatic {
     fn: KnockoutObservableArrayFunctions<any>;
 
-    <T>(value?: T[] | null): KnockoutObservableArray<T>;
+    <T>(value?: T[]): KnockoutObservableArray<T>;
 }
 
 interface KnockoutObservableArray<T> extends KnockoutObservable<T[]>, KnockoutObservableArrayFunctions<T> {
@@ -104,12 +104,12 @@ interface KnockoutObservableArray<T> extends KnockoutObservable<T[]>, KnockoutOb
 interface KnockoutObservableStatic {
     fn: KnockoutObservableFunctions<any>;
 
-    <T>(value?: T | null): KnockoutObservable<T>;
+    <T>(value?: T): KnockoutObservable<T>;
 }
 
 interface KnockoutObservable<T> extends KnockoutSubscribable<T>, KnockoutObservableFunctions<T> {
 	(): T;
-	(value: T | null): void;
+	(value: T): void;
 
 	peek(): T;
 	valueHasMutated?:{(): void;};
@@ -514,7 +514,7 @@ interface KnockoutStatic {
     // templating.js
     //////////////////////////////////
 
-    setTemplateEngine(templateEngine: KnockoutNativeTemplateEngine | undefined): void;
+    setTemplateEngine(templateEngine: KnockoutNativeTemplateEngine): void;
 
     renderTemplate(template: Function, dataOrBindingContext: KnockoutBindingContext, options: Object, targetNodeOrNodeArray: Node, renderMode: string): any;
     renderTemplate(template: any, dataOrBindingContext: KnockoutBindingContext, options: Object, targetNodeOrNodeArray: Node, renderMode: string): any;
@@ -659,7 +659,7 @@ declare namespace KnockoutComponentTypes {
     }
 
     interface Loader {
-        getConfig? (componentName: string, callback: (result: ComponentConfig | null) => void): void;
+        getConfig? (componentName: string, callback: (result: ComponentConfig) => void): void;
         loadComponent? (componentName: string, config: ComponentConfig, callback: (result: Definition) => void): void;
         loadTemplate? (componentName: string, templateConfig: any, callback: (result: Node[]) => void): void;
         loadViewModel? (componentName: string, viewModelConfig: any, callback: (result: any) => void): void;

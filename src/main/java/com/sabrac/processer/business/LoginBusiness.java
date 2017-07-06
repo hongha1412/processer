@@ -12,5 +12,5 @@ import com.sabrac.processer.vo.LoginVO;
  */
 public interface LoginBusiness {
 
-    public User loginValidate(LoginVO loginVO);
+    public User loginValidate(LoginVO loginVO) throws Exception;
 }

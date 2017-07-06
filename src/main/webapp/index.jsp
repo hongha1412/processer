@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-<html lang="en">
+<html lang="en" id="html_content">
 <head>
   <%@ include file="include/header.jsp"%>
   <link rel="stylesheet" href="pagecss/index.css" type="text/css" />
@@ -30,7 +30,8 @@
                 editing options</p>
 
               <!-- start project list -->
-              <div data-bind="if: projectList.length <= 0">
+              <p data-bind="projectList() ? projectList.length <= 0 : true"></p>
+              <div data-bind="if: projectList() ? projectList.length <= 0 : true">
                 <h2>No project found</h2>
               </div>
               <table class="table table-striped projects" data-bind="if: projectList.length > 0">
@@ -67,8 +68,11 @@
           </div>
           <div class="clearfix"></div>
         </div>
-        <div class="pull-right">
-          <button type="button" data-bind="click: adminLogin" class="btn btn-link">Admin Login</button>
+        <div class="pull-left bottom_control" data-bind="visible: isLoggedIn">
+            <button type="button" class="btn btn-primary" data-bind="click: newProject">New Project</button>
+        </div>
+        <div class="pull-right bottom_control" data-bind="visible: !isLoggedIn">
+          <button type="button" class="btn btn-link" data-bind="click: adminLogin">Admin Login</button>
         </div>
       </div>
       <br />

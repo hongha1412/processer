@@ -1,19 +1,42 @@
 /// <reference path="jquery/index.d.ts" />
 /// <reference path="knockout/index.d.ts" />
+/// <reference path="jquery.pnotify/index.d.ts" />
+/// <reference path="utils.ts" />
 'use strict';
 
-module com.sabrac.processer.index {
+module com.sabrac.processer {
 
-    export class ScreenModel {
-        self: any;
+    export class IndexScreenModel {
+        isLoggedIn: KnockoutObservable<boolean>;
         projectList: KnockoutObservableArray<Project>;
+        pageTitle: KnockoutObservable<string>;
 
         constructor() {
-            this.self = this;
-            this.projectList = ko.observableArray([]) as KnockoutObservableArray<Project>;
+            var self = this;
+            this.isLoggedIn = ko.observable<boolean>(false);
+            this.projectList = ko.observableArray<Project>([]);
+            this.pageTitle = ko.observable<string>("Project Processer");
         }
 
-        private adminLogin(): void {
+        startPage(): JQueryPromise<any> {
+            var self = this;
+            var dfd = $.Deferred();
+            Utils.postData("indexService.do", null).done(function(data){
+                self.isLoggedIn(data.isLoggedIn);
+                dfd.resolve(self.isLoggedIn());
+            }).fail(function(data) {
+                Utils.notification("error", "Unexpected error occurred", NotiType.ERROR, false);
+                dfd.resolve(self.isLoggedIn());
+            });
+            return dfd.promise();
+        }
+
+        public newProject() {
+            var self = this;
+            window.location.href = "newproject.do";
+        }
+
+        public adminLogin() {
             window.location.href = "login.do";
         }
     }
@@ -48,6 +71,9 @@ module com.sabrac.processer.index {
     }
 
     $(document).ready(function() {
-       ko.applyBindings(new ScreenModel()); 
+        var screenModel = new IndexScreenModel();
+        screenModel.startPage().done(function() {
+            ko.applyBindings(screenModel, $("#html_content")[0]); 
+        });
     });
 }

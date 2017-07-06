@@ -29,5 +29,13 @@
             </result>
         </action>
 
+        <action name="indexService" class="com.sabrac.processer.action.IndexAction">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+                <param name="excludeNullProperties">true</param>
+                <param name="root">result</param>
+            </result>
+        </action>
+
     </package>
 </struts>

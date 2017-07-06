@@ -24,7 +24,7 @@ public class LoginBusinessImpl implements LoginBusiness {
     /* (non-Javadoc)
      * @see com.sabrac.processer.business.LoginBusiness#loginValidate()
      */
-    public User loginValidate(LoginVO loginVO) {
+    public User loginValidate(LoginVO loginVO) throws Exception {
         // Create user object with received username and password
         User userModel = this.convertVOToModel(loginVO);
         // Set flg for query condition

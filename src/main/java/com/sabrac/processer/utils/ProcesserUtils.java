@@ -3,11 +3,15 @@
  */
 package com.sabrac.processer.utils;
 
-import java.io.BufferedReader;
+import java.io.IOException;
 import java.lang.reflect.Field;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 
 /**
  * @author HaVH
@@ -18,11 +22,14 @@ public class ProcesserUtils {
     /**
      * Parse request reader to json object
      * 
-     * @param br request reader
-     * @return JSon object
+     * @param request HttpServletRequest
+     * @return JSon json object
+     * @throws IOException 
+     * @throws JsonIOException 
+     * @throws JsonSyntaxException 
      */
-    public static JsonObject parseRequest(BufferedReader br) {
-        return new Gson().fromJson(br, JsonObject.class);
+    public static JsonObject parseRequest(HttpServletRequest request) throws JsonSyntaxException, JsonIOException, IOException {
+        return new Gson().fromJson(request.getReader(), JsonObject.class);
     }
 
     /**

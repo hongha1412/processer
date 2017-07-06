@@ -3,17 +3,17 @@
 /// <reference path="utils.ts" />
 'use strict';
 
-import { utils } from "./utils";
-module com.sabrac.processer.login {
-    export class ScreenModel {
-        self: any;
+module com.sabrac.processer {
+    class LoginScreenModel {
         userName: KnockoutObservable<string>;
         password: KnockoutObservable<string>;
+        pageTitle: KnockoutObservable<string>;
 
         constructor() {
-            this.self = this;
-            this.userName = ko.observable("") as KnockoutObservable<string>;
-            this.password = ko.observable("") as KnockoutObservable<string>;
+            var self = this;
+            this.pageTitle = ko.observable<string>("Admin Login");
+            this.userName = ko.observable<string>("");
+            this.password = ko.observable<string>("");
         }
 
         private submit(): void {
@@ -21,21 +21,7 @@ module com.sabrac.processer.login {
                 "userName": this.userName(),
                 "password": this.password()
             }
-//            $.ajax({
-//                url: 'loginService.do',
-//                data: JSON.stringify(dataObject),
-//                type: 'post',
-//                contentType: "application/json; charset=utf-8",
-//                dataType: 'json',
-//                cache: false,
-//                success: function(data) {
-//                    window.location.href = "index.do";
-//                },
-//                error: function(data) {
-//                    alert('error');
-//                }
-//            });
-            utils.postData("loginService.do", dataObject).done(function(result) {
+            Utils.postData("loginService.do", dataObject).done(function(result) {
                 window.location.href = "index.do";
             }).fail(function(result) {
                 alert("error");
@@ -44,6 +30,6 @@ module com.sabrac.processer.login {
     }
 
     $(document).ready(function() {
-       ko.applyBindings(new ScreenModel()); 
+        ko.applyBindings(new LoginScreenModel(), $("#html_content")[0]); 
     });
 }

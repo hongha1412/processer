@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-<html lang="en">
+<html lang="en" id="html_content">
 
 <head>
   <%@ include file="include/header.jsp"%>

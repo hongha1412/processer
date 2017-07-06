@@ -4,7 +4,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title></title>
+<title data-bind="text: pageTitle"></title>
 
 <!-- Bootstrap core CSS -->
 
@@ -22,7 +22,13 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/nprogress.js"></script>
 <script src="js/knockout-3.4.0.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!-- PNotify -->
+<script type="text/javascript" src="js/notify/pnotify.core.js"></script>
+<script type="text/javascript" src="js/notify/pnotify.buttons.js"></script>
+<script type="text/javascript" src="js/notify/pnotify.nonblock.js"></script>
 <script src="js/require.js"></script>
+<script src="pagejs/utils.js"></script>
 
 <!--[if lt IE 9]>
 <script src="../assets/js/ie8-responsive-file-warning.js"></script>

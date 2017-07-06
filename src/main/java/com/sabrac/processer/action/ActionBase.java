@@ -7,11 +7,21 @@ import com.google.gson.JsonObject;
 import com.opensymphony.xwork2.ActionSupport;
 import com.sabrac.processer.utils.ProcesserUtils;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @author HaVH
  *
  */
 public abstract class ActionBase<T> extends ActionSupport {
+
+    /**
+     * Result message return to view
+     */
+    @Getter
+    @Setter
+    private String result;
 
     private static final long serialVersionUID = -2059984471630647453L;
 
