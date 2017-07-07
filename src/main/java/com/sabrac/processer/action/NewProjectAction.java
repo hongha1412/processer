@@ -40,18 +40,25 @@ public class NewProjectAction extends ActionBase<NewProjectVO> {
     @Override
     public String execute() throws Exception {
 
+        // Variable store user info of logged in user
+        User rs = null;
         // Get request from context
         HttpServletRequest request = ServletActionContext.getRequest();
         // If NewProjectVO is not initial, create object
         if (newProjectVO == null) {
             newProjectVO = new NewProjectVO();
         }
-        // Get user info from business
-        User rs = userBusiness.getUserById(Integer.parseInt(request.getSession().getAttribute("loginId").toString()));
+
+        // Check if login id exists in session
+        if (request.getSession().getAttribute("loginId") != null) {
+            // Get user info from business
+            rs = userBusiness.getUserById(Integer.parseInt(request.getSession().getAttribute("loginId").toString()));
+        }
         // If cannot get user info
         if (rs == null || rs.getUUsername() == null) {
             return Action.ERROR;
         }
+
         // Set result to VO
         newProjectVO.setUserName(rs.getUUsername());
         this.setResult(new Gson().toJson(newProjectVO));

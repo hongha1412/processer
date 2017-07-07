@@ -22,6 +22,7 @@ var com;
                         dfd.resolve(self.userName());
                     }).fail(function (data) {
                         processer.Utils.notification("Error", "Cannot get login info", processer.NotiType.ERROR);
+                        console.log("Error: Cannot get login info");
                         dfd.resolve();
                     });
                     return dfd.promise();

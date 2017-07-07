@@ -30,21 +30,10 @@
       org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter
     </filter-class>
   </filter>
-  <filter>
-  	<description>
-  	</description>
-  	<display-name>ProcesserFilter</display-name>
-  	<filter-name>ProcesserFilter</filter-name>
-  	<filter-class>com.sabrac.processer.utils.ProcesserFilter</filter-class>
-  </filter>
 
   <filter-mapping>
     <filter-name>struts2</filter-name>
     <url-pattern>*.do</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-  	<filter-name>ProcesserFilter</filter-name>
-  	<url-pattern>/ProcesserFilter</url-pattern>
   </filter-mapping>
   <servlet>
     <description>

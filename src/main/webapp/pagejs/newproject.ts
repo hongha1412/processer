@@ -24,6 +24,7 @@ module com.sabrac.processer {
                 dfd.resolve(self.userName());
             }).fail(function(data) {
                 Utils.notification("Error", "Cannot get login info", NotiType.ERROR);
+                console.log("Error: Cannot get login info");
                 dfd.resolve();
             });
 

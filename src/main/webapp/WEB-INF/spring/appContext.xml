@@ -11,11 +11,15 @@
         <property name="loginBusiness" ref="loginBusiness" />
     </bean>
 
+    <bean id="newProjectService" class="com.sabrac.processer.action.NewProjectAction">
+        <property name="userBusiness" ref="userBusiness" />
+    </bean>
+
     <bean id="loginBusiness" class="com.sabrac.processer.business.LoginBusinessImpl">
         <property name="userDAO" ref="userDAO" />
     </bean>
 
-    <bean id="newProjectService" class="com.sabrac.processer.business.UserBusinessImpl">
+    <bean id="userBusiness" class="com.sabrac.processer.business.UserBusinessImpl">
         <property name="userDAO" ref="userDAO" />
     </bean>
 
