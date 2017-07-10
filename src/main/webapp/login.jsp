@@ -9,7 +9,7 @@
   <script src="pagejs/login.js"></script>
 </head>
 
-<body style="background:#F7F7F7;">
+<body style="background:#F7F7F7; display: none" data-bind="visible: true">
 
   <div class="">
     <a class="hiddenanchor" id="toregister"></a>

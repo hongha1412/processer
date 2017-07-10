@@ -16,20 +16,41 @@ module com.sabrac.processer {
             this.password = ko.observable<string>("");
         }
 
+        startPage(): JQueryPromise<any> {
+            var self = this;
+            var dfd = $.Deferred();
+            var dataObject = {
+                "function": "init"
+            }
+            Utils.postData("loginService.do", dataObject).done(function(data) {
+                if (data.isLoggedIn) {
+                    window.location.href = "index.do";
+                }
+            }).fail(function(data) {
+                Utils.notification("error", "Unexpected error occurred", NotiType.ERROR, false);
+                dfd.resolve();
+            });
+            return dfd.promise();
+        }
+
         private submit(): void {
             var dataObject = {
+                "function": "login",
                 "userName": this.userName(),
                 "password": this.password()
             }
             Utils.postData("loginService.do", dataObject).done(function(result) {
                 window.location.href = "index.do";
             }).fail(function(result) {
-                alert("error");
+                Utils.notification("error", "Unexpected error occurred", NotiType.ERROR, false);
             });
         }
     }
 
     $(document).ready(function() {
-        ko.applyBindings(new LoginScreenModel(), $("#html_content")[0]); 
+        var screenModel = new LoginScreenModel();
+        screenModel.startPage().done(function() {
+            ko.applyBindings(screenModel, $("#html_content")[0]);
+        });
     });
 }

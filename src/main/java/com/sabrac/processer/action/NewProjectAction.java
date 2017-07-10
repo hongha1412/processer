@@ -50,18 +50,17 @@ public class NewProjectAction extends ActionBase<NewProjectVO> {
         }
 
         // Check if login id exists in session
-        if (request.getSession().getAttribute("loginId") != null) {
-            // Get user info from business
-            rs = userBusiness.getUserById(Integer.parseInt(request.getSession().getAttribute("loginId").toString()));
+        if (request.getSession().getAttribute("loginUser") != null) {
+            // Get user info from session
+            rs = (User)request.getSession().getAttribute("loginUser");
         }
-        // If cannot get user info
-        if (rs == null || rs.getUUsername() == null) {
-            return Action.ERROR;
+        // If user info exists
+        if (rs != null && rs.getUUsername() != null) {
+            // Set result to VO
+            newProjectVO.setUserName(rs.getUUsername());
+            this.setResult(new Gson().toJson(newProjectVO));
         }
 
-        // Set result to VO
-        newProjectVO.setUserName(rs.getUUsername());
-        this.setResult(new Gson().toJson(newProjectVO));
         return Action.SUCCESS;
     }
 

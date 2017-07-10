@@ -37,7 +37,7 @@ public class IndexAction extends ActionBase<IndexVO> {
             indexVO = new IndexVO();
         }
         // Get login status from session and set to VO
-        if (request.getSession().getAttribute("loginId") != null) {
+        if (request.getSession().getAttribute("loginUser") != null) {
             indexVO.setLoggedIn(true);
         }
 

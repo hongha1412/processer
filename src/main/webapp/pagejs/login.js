@@ -15,20 +15,40 @@ var com;
                     this.userName = ko.observable("");
                     this.password = ko.observable("");
                 }
+                startPage() {
+                    var self = this;
+                    var dfd = $.Deferred();
+                    var dataObject = {
+                        "function": "init"
+                    };
+                    processer.Utils.postData("loginService.do", dataObject).done(function (data) {
+                        if (data.isLoggedIn) {
+                            window.location.href = "index.do";
+                        }
+                    }).fail(function (data) {
+                        processer.Utils.notification("error", "Unexpected error occurred", processer.NotiType.ERROR, false);
+                        dfd.resolve();
+                    });
+                    return dfd.promise();
+                }
                 submit() {
                     var dataObject = {
+                        "function": "login",
                         "userName": this.userName(),
                         "password": this.password()
                     };
                     processer.Utils.postData("loginService.do", dataObject).done(function (result) {
                         window.location.href = "index.do";
                     }).fail(function (result) {
-                        alert("error");
+                        processer.Utils.notification("error", "Unexpected error occurred", processer.NotiType.ERROR, false);
                     });
                 }
             }
             $(document).ready(function () {
-                ko.applyBindings(new LoginScreenModel(), $("#html_content")[0]);
+                var screenModel = new LoginScreenModel();
+                screenModel.startPage().done(function () {
+                    ko.applyBindings(screenModel, $("#html_content")[0]);
+                });
             });
         })(processer = sabrac.processer || (sabrac.processer = {}));
     })(sabrac = com.sabrac || (com.sabrac = {}));

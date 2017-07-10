@@ -13,11 +13,27 @@
             <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
         </result-types>
 
+        <interceptors>
+            <interceptor name="processerInterceptor"
+                class="com.sabrac.processer.utils.ProcesserInterceptor"></interceptor>
+            <interceptor-stack name="processerStack">
+                <interceptor-ref name="processerInterceptor"></interceptor-ref>
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="processerStack"></default-interceptor-ref>
+
+        <global-results>
+            <result name="login" type="redirect">/login.do</result>
+        </global-results>
+
         <action name="index" class="">
+            <interceptor-ref name="defaultStack"></interceptor-ref>
             <result name="success">/index.jsp</result>
         </action>
 
         <action name="login" class="">
+            <interceptor-ref name="defaultStack"></interceptor-ref>
             <result name="success">/login.jsp</result>
         </action>
 
