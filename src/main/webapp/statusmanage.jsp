@@ -4,8 +4,8 @@
 <html lang="en" id="html_content">
   <head>
     <%@ include file="include/header.jsp"%>
-    <link rel="stylesheet" href="pagecss/newproject.css" type="text/css" />
-    <script src="pagejs/newproject.js"></script>
+    <link rel="stylesheet" href="pagecss/statusmanage.css" type="text/css" />
+    <script src="pagejs/statusmanage.js"></script>
   </head>
   <body class="nav-md">
     <div class="container body">
@@ -23,7 +23,7 @@
           <div class="row">
             <div class="page-title">
               <div class="title_left">
-                <h3>Add New Project</h3>
+                <h3>Status Manage</h3>
               </div>
               <!-- <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -41,30 +41,14 @@
               <div class="x_panel">
                 <div class="row x_title">
                   <div class="col-md-6">
-                    <h2>Project Information <!-- <small>no content</small> --></h2>
+                    <h2>Status List <!-- <small>no content</small> --></h2>
                   </div>
                   <div class="col-md-6">
                   </div>
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <form class="form-horizontal form-label-left input_mask">
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-name">Project Name <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="project-name" required="required" class="form-control col-md-7 col-xs-12">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-status">Project Status <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select class="select2_single form-control" tabindex="-1" data-bind="options: lsProjectStatus,
-                            optionsText: statusName,
-                            optionsValue: statusId,
-                            value: selectedStatus"></select>
-                      </div>
-                    </div>
+                    
                   </form>
                 </div>
                 <div class="clearfix"></div>
@@ -75,7 +59,7 @@
           <!-- footer content -->
           <footer>
             <div class="copyright-info">
-              <p class="pull-right">Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>      
+              <p class="pull-right">Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
               </p>
             </div>
             <div class="clearfix"></div>

@@ -10,20 +10,38 @@
     <bean id="loginService" class="com.sabrac.processer.action.LoginAction">
         <property name="loginBusiness" ref="loginBusiness" />
     </bean>
-
+    <bean id="indexService" class="com.sabrac.processer.action.IndexAction">
+        <property name="projectBusiness" ref="projectBusiness" />
+    </bean>
     <bean id="newProjectService" class="com.sabrac.processer.action.NewProjectAction">
         <property name="userBusiness" ref="userBusiness" />
+        <property name="statusBusiness" ref="statusBusiness" />
     </bean>
 
     <bean id="loginBusiness" class="com.sabrac.processer.business.LoginBusinessImpl">
         <property name="userDAO" ref="userDAO" />
     </bean>
-
     <bean id="userBusiness" class="com.sabrac.processer.business.UserBusinessImpl">
         <property name="userDAO" ref="userDAO" />
     </bean>
+    <bean id="projectBusiness" class="com.sabrac.processer.business.ProjectBusinessImpl">
+        <property name="projectDAO" ref="projectDAO" />
+    </bean>
+    <bean id="statusBusiness" class="com.sabrac.processer.business.StatusBusinessImpl">
+        <property name="statusDAO" ref="statusDAO" />
+    </bean>
 
     <bean id="userDAO" class="com.sabrac.processer.dao.UserDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+    <bean id="projectDAO" class="com.sabrac.processer.dao.ProjectDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+    <bean id="statusDAO" class="com.sabrac.processer.dao.StatusDAOImpl">
         <constructor-arg>
             <ref bean="sessionFactory" />
         </constructor-arg>

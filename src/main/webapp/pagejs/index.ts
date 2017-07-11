@@ -20,7 +20,10 @@ module com.sabrac.processer {
         startPage(): JQueryPromise<any> {
             var self = this;
             var dfd = $.Deferred();
-            Utils.postData("indexService.do", null).done(function(data){
+            var data = {
+                "function": "init"
+            }
+            Utils.postData("indexService.do", data).done(function(data){
                 self.isLoggedIn(data.isLoggedIn);
                 dfd.resolve(self.isLoggedIn());
             }).fail(function(data) {
@@ -41,31 +44,53 @@ module com.sabrac.processer {
     }
 
     export class Project {
-        self: any;
         pjId: KnockoutObservable<number>;
         pjName: KnockoutObservable<string>;
         pjType: KnockoutObservable<string>;
-        pjStatus: KnockoutObservable<string>;
+        pjStatus: KnockoutObservable<Status>;
         pjCapacity: KnockoutObservable<number>;
+        pjAssignee: KnockoutObservable<string>;
         pjReceiveDate: KnockoutObservable<string>;
+        pjSendDate: KnockoutObservable<string>;
+        pjDeadLine: KnockoutObservable<string>;
+        pjComment: KnockoutObservable<string>;
 
         constructor() {
-            this.self = this;
-            this.pjId = ko.observable(-1) as KnockoutObservable<number>;
-            this.pjName = ko.observable("") as KnockoutObservable<string>;
-            this.pjType = ko.observable("") as KnockoutObservable<string>;
-            this.pjStatus = ko.observable("") as KnockoutObservable<string>;
-            this.pjCapacity = ko.observable(0) as KnockoutObservable<number>;
-            this.pjReceiveDate = ko.observable(new Date().toLocaleDateString()) as KnockoutObservable<string>;
+            var self = this;
+            self.pjId = ko.observable<number>(-1);
+            self.pjName = ko.observable<string>("");
+            self.pjType = ko.observable<string>("");
+            self.pjStatus = ko.observable<Status>(null);
+            self.pjCapacity = ko.observable<number>(0);
+            self.pjAssignee = ko.observable<string>("");
+            self.pjReceiveDate = ko.observable<string>(new Date().toLocaleDateString());
+            self.pjSendDate = ko.observable<string>(new Date().toLocaleDateString());
+            self.pjDeadLine = ko.observable<string>(new Date().toLocaleDateString());
+            self.pjComment = ko.observable<string>("");
         }
 
-        loadData(pjId: number, pjName: string, pjType: string, pjStatus: string, pjCapacity: number, pjReceiveDate: string) {
-            this.pjId(pjId);
-            this.pjName(pjName);
-            this.pjType(pjType);
-            this.pjStatus(pjStatus);
-            this.pjCapacity(pjCapacity);
-            this.pjReceiveDate(pjReceiveDate);
+        loadData(pjId: number,
+                pjName: string, 
+                pjType: string, 
+                pjStatus: Status, 
+                pjCapacity: number,
+                pjAssignee: string, 
+                pjReceiveDate: string,
+                pjSendDate: string,
+                pjDeadLine: string,
+                pjComment: string) {
+
+            var self = this;
+            self.pjId(pjId);
+            self.pjName(pjName);
+            self.pjType(pjType);
+            self.pjStatus(pjStatus);
+            self.pjCapacity(pjCapacity);
+            self.pjAssignee(pjAssignee);
+            self.pjReceiveDate(pjReceiveDate);
+            self.pjSendDate(pjSendDate);
+            self.pjDeadLine(pjDeadLine);
+            self.pjComment(pjComment);
         }
     }
 

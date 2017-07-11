@@ -49,7 +49,7 @@
             </result>
         </action>
 
-        <action name="indexService" class="com.sabrac.processer.action.IndexAction">
+        <action name="indexService" class="indexService">
             <result name="success" type="json">
                 <param name="noCache">true</param>
                 <param name="excludeNullProperties">true</param>

@@ -23,9 +23,10 @@ module com.sabrac.processer {
                 "function": "init"
             }
             Utils.postData("loginService.do", dataObject).done(function(data) {
-                if (data.isLoggedIn) {
+                if (data && data.isLoggedIn) {
                     window.location.href = "index.do";
                 }
+                dfd.resolve();
             }).fail(function(data) {
                 Utils.notification("error", "Unexpected error occurred", NotiType.ERROR, false);
                 dfd.resolve();

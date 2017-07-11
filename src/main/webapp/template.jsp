@@ -4,8 +4,8 @@
 <html lang="en" id="html_content">
   <head>
     <%@ include file="include/header.jsp"%>
-    <link rel="stylesheet" href="pagecss/newproject.css" type="text/css" />
-    <script src="pagejs/newproject.js"></script>
+    <link rel="stylesheet" href="pagecss/statuslist.css" type="text/css" />
+    <script src="pagejs/statuslist.js"></script>
   </head>
   <body class="nav-md">
     <div class="container body">
@@ -48,23 +48,7 @@
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <form class="form-horizontal form-label-left input_mask">
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-name">Project Name <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="project-name" required="required" class="form-control col-md-7 col-xs-12">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-status">Project Status <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select class="select2_single form-control" tabindex="-1" data-bind="options: lsProjectStatus,
-                            optionsText: statusName,
-                            optionsValue: statusId,
-                            value: selectedStatus"></select>
-                      </div>
-                    </div>
+                    
                   </form>
                 </div>
                 <div class="clearfix"></div>

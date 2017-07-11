@@ -18,7 +18,10 @@ var com;
                 startPage() {
                     var self = this;
                     var dfd = $.Deferred();
-                    processer.Utils.postData("indexService.do", null).done(function (data) {
+                    var data = {
+                        "function": "init"
+                    };
+                    processer.Utils.postData("indexService.do", data).done(function (data) {
                         self.isLoggedIn(data.isLoggedIn);
                         dfd.resolve(self.isLoggedIn());
                     }).fail(function (data) {
@@ -38,21 +41,30 @@ var com;
             processer.IndexScreenModel = IndexScreenModel;
             class Project {
                 constructor() {
-                    this.self = this;
-                    this.pjId = ko.observable(-1);
-                    this.pjName = ko.observable("");
-                    this.pjType = ko.observable("");
-                    this.pjStatus = ko.observable("");
-                    this.pjCapacity = ko.observable(0);
-                    this.pjReceiveDate = ko.observable(new Date().toLocaleDateString());
+                    var self = this;
+                    self.pjId = ko.observable(-1);
+                    self.pjName = ko.observable("");
+                    self.pjType = ko.observable("");
+                    self.pjStatus = ko.observable(null);
+                    self.pjCapacity = ko.observable(0);
+                    self.pjAssignee = ko.observable("");
+                    self.pjReceiveDate = ko.observable(new Date().toLocaleDateString());
+                    self.pjSendDate = ko.observable(new Date().toLocaleDateString());
+                    self.pjDeadLine = ko.observable(new Date().toLocaleDateString());
+                    self.pjComment = ko.observable("");
                 }
-                loadData(pjId, pjName, pjType, pjStatus, pjCapacity, pjReceiveDate) {
-                    this.pjId(pjId);
-                    this.pjName(pjName);
-                    this.pjType(pjType);
-                    this.pjStatus(pjStatus);
-                    this.pjCapacity(pjCapacity);
-                    this.pjReceiveDate(pjReceiveDate);
+                loadData(pjId, pjName, pjType, pjStatus, pjCapacity, pjAssignee, pjReceiveDate, pjSendDate, pjDeadLine, pjComment) {
+                    var self = this;
+                    self.pjId(pjId);
+                    self.pjName(pjName);
+                    self.pjType(pjType);
+                    self.pjStatus(pjStatus);
+                    self.pjCapacity(pjCapacity);
+                    self.pjAssignee(pjAssignee);
+                    self.pjReceiveDate(pjReceiveDate);
+                    self.pjSendDate(pjSendDate);
+                    self.pjDeadLine(pjDeadLine);
+                    self.pjComment(pjComment);
                 }
             }
             processer.Project = Project;

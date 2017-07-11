@@ -11,14 +11,17 @@ var com;
             class NewProjectScreenModel {
                 constructor() {
                     var self = this;
-                    this.pageTitle = ko.observable("New Project");
-                    this.userName = ko.observable("");
+                    self.pageTitle = ko.observable("New Project");
+                    self.userName = ko.observable("");
+                    self.lsProjectStatus = ko.observableArray([]);
+                    self.selectedStatus = ko.observable(-1);
                 }
                 startPage() {
                     var self = this;
                     var dfd = $.Deferred();
                     processer.Utils.postData("newProjectService.do", null).done(function (data) {
                         self.userName(data.userName);
+                        self.lsProjectStatus(data.lsProjectStatus);
                         dfd.resolve(self.userName());
                     }).fail(function (data) {
                         processer.Utils.notification("Error", "Cannot get login info", processer.NotiType.ERROR);
@@ -29,6 +32,14 @@ var com;
                 }
             }
             processer.NewProjectScreenModel = NewProjectScreenModel;
+            class Status {
+                constructor() {
+                    var self = this;
+                    self.statusId = ko.observable(-1);
+                    self.statusName = ko.observable("");
+                }
+            }
+            processer.Status = Status;
             $(document).ready(function () {
                 var screenModel = new NewProjectScreenModel();
                 $.blockUI();

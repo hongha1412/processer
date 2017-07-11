@@ -20,6 +20,7 @@ import com.sabrac.processer.model.User;
  * @see com.sabrac.processer.model.User
  * @author Hibernate Tools
  */
+@Transactional
 public class UserDAOImpl implements UserDAO {
 
     private static final Log log = LogFactory.getLog(UserDAOImpl.class);
@@ -114,7 +115,6 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
-    @Transactional
     @SuppressWarnings({ "unchecked", "deprecation" })
     public List<User> findByExample(User instance) {
         log.debug("finding User instance by example");

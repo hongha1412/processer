@@ -21,20 +21,22 @@
       <h3>General</h3>
       <ul class="nav side-menu">
         <li>
-          <a><i class="fa fa-home"></i> Menu1 <span class="fa fa-chevron-down"></span></a>
+          <a><i class="fa fa-home"></i> Processer Manage <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu" style="display: none">
-            <li><a href="empty.html">Sub1.1</a>
+            <li><a class="function" href="empty.html">Project List</a>
             </li>
-            <li><a href="empty.html">Sub1.2</a>
+            <li><a class="function" href="statuslist.do">Status Manage</a>
+            </li>
+            <li><a class="function" href="newproject.do">Create Project</a>
             </li>
           </ul>
         </li>
         <li>
-          <a><i class="fa fa-edit"></i> Menu2 <span class="fa fa-chevron-down"></span></a>
+          <a><i class="fa fa-edit"></i> Project Manage <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu" style="display: none">
-            <li><a href="empty.html">Menu2.1</a>
+            <li><a class="function" href="empty.html">Feedback Timeline</a>
             </li>
-            <li><a href="empty.html">Meny2.2s</a>
+            <li><a class="function" href="empty.html">Create Feedback</a>
             </li>
           </ul>
         </li>

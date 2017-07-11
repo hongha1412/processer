@@ -22,9 +22,10 @@ var com;
                         "function": "init"
                     };
                     processer.Utils.postData("loginService.do", dataObject).done(function (data) {
-                        if (data.isLoggedIn) {
+                        if (data && data.isLoggedIn) {
                             window.location.href = "index.do";
                         }
+                        dfd.resolve();
                     }).fail(function (data) {
                         processer.Utils.notification("error", "Unexpected error occurred", processer.NotiType.ERROR, false);
                         dfd.resolve();

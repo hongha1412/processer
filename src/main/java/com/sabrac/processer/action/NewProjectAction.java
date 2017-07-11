@@ -3,13 +3,19 @@
  */
 package com.sabrac.processer.action;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.Action;
+import com.sabrac.processer.business.StatusBusiness;
 import com.sabrac.processer.business.UserBusiness;
+import com.sabrac.processer.model.Status;
 import com.sabrac.processer.model.User;
 import com.sabrac.processer.vo.NewProjectVO;
 
@@ -33,6 +39,8 @@ public class NewProjectAction extends ActionBase<NewProjectVO> {
 
     @Setter
     private UserBusiness userBusiness;
+    @Setter
+    private StatusBusiness statusBusiness;
 
     /* (non-Javadoc)
      * @see com.sabrac.processer.action.ActionBase#execute()
@@ -40,6 +48,8 @@ public class NewProjectAction extends ActionBase<NewProjectVO> {
     @Override
     public String execute() throws Exception {
 
+        // Variable store project status
+        List<Status> lsStatus = new ArrayList<>();
         // Variable store user info of logged in user
         User rs = null;
         // Get request from context
@@ -58,8 +68,20 @@ public class NewProjectAction extends ActionBase<NewProjectVO> {
         if (rs != null && rs.getUUsername() != null) {
             // Set result to VO
             newProjectVO.setUserName(rs.getUUsername());
+        } else {
+            // Return to view if not logged in
             this.setResult(new Gson().toJson(newProjectVO));
+            return Action.SUCCESS;
         }
+
+        // Get status info
+        lsStatus = statusBusiness.getListStatus();
+        // Set status data into VO
+        newProjectVO.setLsProjectStatus(lsStatus.stream().map(x -> {
+            return statusBusiness.convertToVO(x);
+        }).collect(Collectors.toList()));
+        // Set VO object into result
+        this.setResult(new Gson().toJson(newProjectVO));
 
         return Action.SUCCESS;
     }
