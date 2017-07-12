@@ -25,7 +25,7 @@
           <ul class="nav child_menu" style="display: none">
             <li><a class="function" href="empty.html">Project List</a>
             </li>
-            <li><a class="function" href="statuslist.do">Status Manage</a>
+            <li><a class="function" href="statusmanage.do">Status Manage</a>
             </li>
             <li><a class="function" href="newproject.do">Create Project</a>
             </li>

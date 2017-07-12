@@ -31,14 +31,15 @@
             <interceptor-ref name="defaultStack"></interceptor-ref>
             <result name="success">/index.jsp</result>
         </action>
-
         <action name="login" class="">
             <interceptor-ref name="defaultStack"></interceptor-ref>
             <result name="success">/login.jsp</result>
         </action>
-
         <action name="newproject" class="">
             <result name="success">/newproject.jsp</result>
+        </action>
+        <action name="statusmanage" class="">
+            <result name="success">/statusmanage.jsp</result>
         </action>
 
         <action name="loginService" class="loginService">
@@ -48,7 +49,6 @@
                 <param name="root">result</param>
             </result>
         </action>
-
         <action name="indexService" class="indexService">
             <result name="success" type="json">
                 <param name="noCache">true</param>
@@ -56,8 +56,13 @@
                 <param name="root">result</param>
             </result>
         </action>
-
         <action name="newProjectService" class="newProjectService">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+                <param name="excludeNullProperties">true</param>
+                <param name="root">result</param>
+            </result>
+        </action><action name="statusService" class="statusService">
             <result name="success" type="json">
                 <param name="noCache">true</param>
                 <param name="excludeNullProperties">true</param>

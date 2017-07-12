@@ -5,6 +5,10 @@
   <head>
     <%@ include file="include/header.jsp"%>
     <link rel="stylesheet" href="pagecss/statusmanage.css" type="text/css" />
+    <link href="js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <script src="js/datatables/jquery.dataTables.min.js"></script>
+    <script src="js/datatables/dataTables.bootstrap.js"></script>
+    <script src="js/datatables/dataTables.responsive.min.js"></script>
     <script src="pagejs/statusmanage.js"></script>
   </head>
   <body class="nav-md">
@@ -49,7 +53,8 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <form class="form-horizontal form-label-left input_mask">
                     <div class="col-md-6 col-xs-12">
-                      123
+                      <table id="status_list" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                      </table>
                     </div>
                     <div class="col-md-6 col-xs-12">
                       465

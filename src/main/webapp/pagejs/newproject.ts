@@ -29,22 +29,10 @@ module com.sabrac.processer {
                 dfd.resolve(self.userName());
             }).fail(function(data) {
                 Utils.notification("Error", "Cannot get login info", NotiType.ERROR);
-                console.log("Error: Cannot get login info");
                 dfd.resolve();
             });
 
             return dfd.promise();
-        }
-    }
-
-    export class Status {
-        statusId: KnockoutObservable<number>;
-        statusName: KnockoutObservable<string>; 
-
-        constructor() {
-            var self = this;
-            self.statusId = ko.observable<number>(-1);
-            self.statusName = ko.observable<string>("");
         }
     }
 

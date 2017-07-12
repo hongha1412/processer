@@ -59,7 +59,7 @@ public class NewProjectAction extends ActionBase<NewProjectVO> {
             newProjectVO = new NewProjectVO();
         }
 
-        // Check if login id exists in session
+        // Check if login user info exists in session
         if (request.getSession().getAttribute("loginUser") != null) {
             // Get user info from session
             rs = (User)request.getSession().getAttribute("loginUser");

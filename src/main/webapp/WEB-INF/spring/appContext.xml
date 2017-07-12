@@ -17,6 +17,10 @@
         <property name="userBusiness" ref="userBusiness" />
         <property name="statusBusiness" ref="statusBusiness" />
     </bean>
+    <bean id="statusService" class="com.sabrac.processer.action.StatusAction">
+        <property name="userBusiness" ref="userBusiness" />
+        <property name="statusBusiness" ref="statusBusiness" />
+    </bean>
 
     <bean id="loginBusiness" class="com.sabrac.processer.business.LoginBusinessImpl">
         <property name="userDAO" ref="userDAO" />
