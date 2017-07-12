@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated Jul 3, 2017 3:14:45 PM by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 12, 2017 8:52:33 AM by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
     <class catalog="processer" dynamic-insert="false" dynamic-update="false" mutable="true" name="com.sabrac.processer.model.Project" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="project">
         <id name="pjId" type="java.lang.Integer">
             <column name="pj_id"/>
             <generator class="identity"/>
         </id>
-        <many-to-one class="com.sabrac.processer.model.Member" embed-xml="true" fetch="select" insert="true" name="member" not-found="exception" optimistic-lock="true" unique="false" update="true">
-            <column name="pj_asignee"/>
+        <many-to-one class="com.sabrac.processer.model.Customer" embed-xml="true" fetch="select" insert="true" name="customer" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="pj_customer" not-null="true"/>
         </many-to-one>
         <many-to-one class="com.sabrac.processer.model.Status" embed-xml="true" fetch="select" insert="true" name="status" not-found="exception" optimistic-lock="true" unique="false" update="true">
             <column name="pj_status"/>
         </many-to-one>
+        <many-to-one class="com.sabrac.processer.model.Type" embed-xml="true" fetch="select" insert="true" name="type" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="pj_type"/>
+        </many-to-one>
         <property generated="never" lazy="false" name="pjName" optimistic-lock="true" type="string" unique="false">
             <column name="pj_name" not-null="true"/>
         </property>
-        <property generated="never" lazy="false" name="pjType" optimistic-lock="true" type="java.lang.Integer" unique="false">
-            <column name="pj_type"/>
-        </property>
         <property generated="never" lazy="false" name="pjCapacity" optimistic-lock="true" type="java.lang.Integer" unique="false">
             <column name="pj_capacity"/>
+        </property>
+        <property generated="never" lazy="false" name="pjAsignee" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="pj_asignee"/>
         </property>
         <property generated="never" lazy="false" name="pjReceivedate" optimistic-lock="true" type="timestamp" unique="false">
             <column length="19" name="pj_receivedate"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated Jul 3, 2017 3:14:45 PM by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 12, 2017 8:52:33 AM by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
     <class catalog="processer" dynamic-insert="false" dynamic-update="false" mutable="true" name="com.sabrac.processer.model.Type" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="type">
         <id name="TId" type="java.lang.Integer">
@@ -12,5 +12,17 @@
         <property generated="never" lazy="false" name="TFlg" optimistic-lock="true" type="byte" unique="false">
             <column name="t_flg" not-null="true"/>
         </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="projects" optimistic-lock="true" sort="unsorted" table="project">
+            <key on-delete="noaction">
+                <column name="pj_type"/>
+            </key>
+            <one-to-many class="com.sabrac.processer.model.Project" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="feedbacks" optimistic-lock="true" sort="unsorted" table="feedback">
+            <key on-delete="noaction">
+                <column name="fb_type" not-null="true"/>
+            </key>
+            <one-to-many class="com.sabrac.processer.model.Feedback" embed-xml="true" not-found="exception"/>
+        </set>
     </class>
 </hibernate-mapping>

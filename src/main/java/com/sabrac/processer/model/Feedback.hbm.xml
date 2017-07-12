@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated Jul 3, 2017 3:14:45 PM by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 12, 2017 8:52:33 AM by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
     <class catalog="processer" dynamic-insert="false" dynamic-update="false" mutable="true" name="com.sabrac.processer.model.Feedback" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="feedback">
         <id name="fbId" type="java.lang.Integer">
@@ -9,11 +9,11 @@
         <many-to-one class="com.sabrac.processer.model.Project" embed-xml="true" fetch="select" insert="true" name="project" not-found="exception" optimistic-lock="true" unique="false" update="true">
             <column name="fb_p_id" not-null="true"/>
         </many-to-one>
+        <many-to-one class="com.sabrac.processer.model.Type" embed-xml="true" fetch="select" insert="true" name="type" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="fb_type" not-null="true"/>
+        </many-to-one>
         <property generated="never" lazy="false" name="fbTitle" optimistic-lock="true" type="string" unique="false">
             <column name="fb_title"/>
-        </property>
-        <property generated="never" lazy="false" name="fbType" optimistic-lock="true" type="int" unique="false">
-            <column name="fb_type" not-null="true"/>
         </property>
         <property generated="never" lazy="false" name="fbDescription" optimistic-lock="true" type="string" unique="false">
             <column name="fb_description"/>
