@@ -52,8 +52,9 @@ var com;
                     self.pjSendDate = ko.observable(new Date().toLocaleDateString());
                     self.pjDeadLine = ko.observable(new Date().toLocaleDateString());
                     self.pjComment = ko.observable("");
+                    self.pjCustomer = ko.observable("");
                 }
-                loadData(pjId, pjName, pjType, pjStatus, pjCapacity, pjAssignee, pjReceiveDate, pjSendDate, pjDeadLine, pjComment) {
+                loadData(pjId, pjName, pjType, pjStatus, pjCapacity, pjAssignee, pjReceiveDate, pjSendDate, pjDeadLine, pjComment, pjCustomer) {
                     var self = this;
                     self.pjId(pjId);
                     self.pjName(pjName);
@@ -65,6 +66,7 @@ var com;
                     self.pjSendDate(pjSendDate);
                     self.pjDeadLine(pjDeadLine);
                     self.pjComment(pjComment);
+                    self.pjCustomer(pjCustomer);
                 }
             }
             processer.Project = Project;

@@ -1,5 +1,5 @@
 package com.sabrac.processer.model;
-// Generated Jul 3, 2017 3:14:44 PM by Hibernate Tools 5.2.3.Final
+// Generated Jul 12, 2017 9:59:20 AM by Hibernate Tools 5.2.3.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -11,11 +11,12 @@ import java.util.Set;
 public class Project implements java.io.Serializable {
 
     private Integer pjId;
-    private Member member;
+    private Customer customer;
     private Status status;
+    private Type type;
     private String pjName;
-    private Integer pjType;
     private Integer pjCapacity;
+    private Integer pjAsignee;
     private Date pjReceivedate;
     private Date pjSenddate;
     private Date pjDeadline;
@@ -27,19 +28,21 @@ public class Project implements java.io.Serializable {
     public Project() {
     }
 
-    public Project(String pjName, byte pjFlg) {
+    public Project(Customer customer, String pjName, byte pjFlg) {
+        this.customer = customer;
         this.pjName = pjName;
         this.pjFlg = pjFlg;
     }
 
-    public Project(Member member, Status status, String pjName, Integer pjType, Integer pjCapacity, Date pjReceivedate,
-            Date pjSenddate, Date pjDeadline, String pjComment, byte pjFlg, Set<Feedback> feedbacks,
+    public Project(Customer customer, Status status, Type type, String pjName, Integer pjCapacity, Integer pjAsignee,
+            Date pjReceivedate, Date pjSenddate, Date pjDeadline, String pjComment, byte pjFlg, Set<Feedback> feedbacks,
             Set<ProjectMember> projectMembers) {
-        this.member = member;
+        this.customer = customer;
         this.status = status;
+        this.type = type;
         this.pjName = pjName;
-        this.pjType = pjType;
         this.pjCapacity = pjCapacity;
+        this.pjAsignee = pjAsignee;
         this.pjReceivedate = pjReceivedate;
         this.pjSenddate = pjSenddate;
         this.pjDeadline = pjDeadline;
@@ -57,12 +60,12 @@ public class Project implements java.io.Serializable {
         this.pjId = pjId;
     }
 
-    public Member getMember() {
-        return this.member;
+    public Customer getCustomer() {
+        return this.customer;
     }
 
-    public void setMember(Member member) {
-        this.member = member;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public Status getStatus() {
@@ -73,6 +76,14 @@ public class Project implements java.io.Serializable {
         this.status = status;
     }
 
+    public Type getType() {
+        return this.type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     public String getPjName() {
         return this.pjName;
     }
@@ -81,20 +92,20 @@ public class Project implements java.io.Serializable {
         this.pjName = pjName;
     }
 
-    public Integer getPjType() {
-        return this.pjType;
-    }
-
-    public void setPjType(Integer pjType) {
-        this.pjType = pjType;
-    }
-
     public Integer getPjCapacity() {
         return this.pjCapacity;
     }
 
     public void setPjCapacity(Integer pjCapacity) {
         this.pjCapacity = pjCapacity;
+    }
+
+    public Integer getPjAsignee() {
+        return this.pjAsignee;
+    }
+
+    public void setPjAsignee(Integer pjAsignee) {
+        this.pjAsignee = pjAsignee;
     }
 
     public Date getPjReceivedate() {

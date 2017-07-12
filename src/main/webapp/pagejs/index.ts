@@ -54,6 +54,7 @@ module com.sabrac.processer {
         pjSendDate: KnockoutObservable<string>;
         pjDeadLine: KnockoutObservable<string>;
         pjComment: KnockoutObservable<string>;
+        pjCustomer: KnockoutObservable<string>;
 
         constructor() {
             var self = this;
@@ -67,6 +68,7 @@ module com.sabrac.processer {
             self.pjSendDate = ko.observable<string>(new Date().toLocaleDateString());
             self.pjDeadLine = ko.observable<string>(new Date().toLocaleDateString());
             self.pjComment = ko.observable<string>("");
+            self.pjCustomer = ko.observable<string>("");
         }
 
         loadData(pjId: number,
@@ -78,7 +80,8 @@ module com.sabrac.processer {
                 pjReceiveDate: string,
                 pjSendDate: string,
                 pjDeadLine: string,
-                pjComment: string) {
+                pjComment: string,
+                pjCustomer: string) {
 
             var self = this;
             self.pjId(pjId);
@@ -91,6 +94,7 @@ module com.sabrac.processer {
             self.pjSendDate(pjSendDate);
             self.pjDeadLine(pjDeadLine);
             self.pjComment(pjComment);
+            self.pjCustomer(pjCustomer);
         }
     }
 

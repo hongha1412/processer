@@ -1,5 +1,5 @@
 package com.sabrac.processer.model;
-// Generated Jul 3, 2017 3:14:44 PM by Hibernate Tools 5.2.3.Final
+// Generated Jul 12, 2017 9:59:20 AM by Hibernate Tools 5.2.3.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +13,6 @@ public class Member implements java.io.Serializable {
     private String MName;
     private String MComment;
     private byte MFlg;
-    private Set<Project> projects = new HashSet<Project>(0);
     private Set<ProjectMember> projectMembers = new HashSet<ProjectMember>(0);
 
     public Member() {
@@ -23,11 +22,10 @@ public class Member implements java.io.Serializable {
         this.MFlg = MFlg;
     }
 
-    public Member(String MName, String MComment, byte MFlg, Set<Project> projects, Set<ProjectMember> projectMembers) {
+    public Member(String MName, String MComment, byte MFlg, Set<ProjectMember> projectMembers) {
         this.MName = MName;
         this.MComment = MComment;
         this.MFlg = MFlg;
-        this.projects = projects;
         this.projectMembers = projectMembers;
     }
 
@@ -61,14 +59,6 @@ public class Member implements java.io.Serializable {
 
     public void setMFlg(byte MFlg) {
         this.MFlg = MFlg;
-    }
-
-    public Set<Project> getProjects() {
-        return this.projects;
-    }
-
-    public void setProjects(Set<Project> projects) {
-        this.projects = projects;
     }
 
     public Set<ProjectMember> getProjectMembers() {

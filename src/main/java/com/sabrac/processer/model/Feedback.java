@@ -1,5 +1,5 @@
 package com.sabrac.processer.model;
-// Generated Jul 3, 2017 3:14:44 PM by Hibernate Tools 5.2.3.Final
+// Generated Jul 12, 2017 9:59:20 AM by Hibernate Tools 5.2.3.Final
 
 import java.util.Date;
 
@@ -10,8 +10,8 @@ public class Feedback implements java.io.Serializable {
 
     private Integer fbId;
     private Project project;
+    private Type type;
     private String fbTitle;
-    private int fbType;
     private String fbDescription;
     private Integer fbStatus;
     private Date fbReceivedate;
@@ -22,17 +22,17 @@ public class Feedback implements java.io.Serializable {
     public Feedback() {
     }
 
-    public Feedback(Project project, int fbType, byte fbFlg) {
+    public Feedback(Project project, Type type, byte fbFlg) {
         this.project = project;
-        this.fbType = fbType;
+        this.type = type;
         this.fbFlg = fbFlg;
     }
 
-    public Feedback(Project project, String fbTitle, int fbType, String fbDescription, Integer fbStatus,
+    public Feedback(Project project, Type type, String fbTitle, String fbDescription, Integer fbStatus,
             Date fbReceivedate, Date fbSenddate, Date fbDeadline, byte fbFlg) {
         this.project = project;
+        this.type = type;
         this.fbTitle = fbTitle;
-        this.fbType = fbType;
         this.fbDescription = fbDescription;
         this.fbStatus = fbStatus;
         this.fbReceivedate = fbReceivedate;
@@ -57,20 +57,20 @@ public class Feedback implements java.io.Serializable {
         this.project = project;
     }
 
+    public Type getType() {
+        return this.type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     public String getFbTitle() {
         return this.fbTitle;
     }
 
     public void setFbTitle(String fbTitle) {
         this.fbTitle = fbTitle;
-    }
-
-    public int getFbType() {
-        return this.fbType;
-    }
-
-    public void setFbType(int fbType) {
-        this.fbType = fbType;
     }
 
     public String getFbDescription() {

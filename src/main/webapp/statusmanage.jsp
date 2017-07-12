@@ -48,7 +48,12 @@
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <form class="form-horizontal form-label-left input_mask">
-                    
+                    <div class="col-md-6 col-xs-12">
+                      123
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                      465
+                    </div>
                   </form>
                 </div>
                 <div class="clearfix"></div>
