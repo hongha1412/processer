@@ -64,11 +64,15 @@ public class StatusAction extends ActionBase<StatusVO> {
                 this.setResult(new Gson().toJson(statusVO));
                 return Action.SUCCESS;
             }
-            // Set result VO
-            this.setResult(new Gson().toJson(statusVO));
         } else if (statusVO.getFunction().equals("new")) {
             statusBusiness.addStatus(statusVO);
+            // Clear statusVO data
+            statusVO = new StatusVO();
         }
+        // Get list status
+        statusVO.setLsStatus(statusBusiness.getListStatus());
+        // Set result VO and return to view
+        this.setResult(new Gson().toJson(statusVO));
         return Action.SUCCESS;
     }
 

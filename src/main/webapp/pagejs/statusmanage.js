@@ -32,7 +32,7 @@ var com;
                         if (data && data.userName) {
                             self.userName(data.userName);
                         }
-                        self.listStatus().loadData();
+                        self.listStatus().loadData(data.lsStatus);
                         dfd.resolve(self.listStatus());
                     }).fail(function (data) {
                         processer.Utils.notification("Error", "Unexpected error occur", processer.NotiType.ERROR);
@@ -52,7 +52,7 @@ var com;
                         "statusName": self.statusName()
                     };
                     processer.Utils.postData("statusService.do", data).done(function (data) {
-                        self.listStatus().loadData();
+                        self.listStatus().loadData(data.lsStatus);
                     }).fail(function (data) {
                         processer.Utils.notification("Error", "Unexpected error occur", processer.NotiType.ERROR);
                     });
@@ -85,14 +85,20 @@ var com;
                         statusListScreenModel.statusName(selectedStatus.statusName());
                     };
                 }
-                loadData() {
+                loadData(lsStatus) {
                     var self = this;
+                    self.lsStatus([]);
+                    $.each(lsStatus, function (statusItem) {
+                        self.lsStatus.push(new Status(statusItem.SId, statusItem.SName));
+                    });
+                    $("#list_status").igGrid("dataSourceObject", self.lsStatus());
+                    $("#list_status").igGrid("dataBind");
                     // Mockup data
-                    self.lsStatus.push(new Status(0, "Test 0"));
-                    self.lsStatus.push(new Status(1, "Test 1"));
-                    self.lsStatus.push(new Status(2, "Test 2"));
-                    self.lsStatus.push(new Status(3, "Test 3"));
-                    self.lsStatus.push(new Status(4, "Test 4"));
+                    //            self.lsStatus.push(new Status(0, "Test 0"));
+                    //            self.lsStatus.push(new Status(1, "Test 1"));
+                    //            self.lsStatus.push(new Status(2, "Test 2"));
+                    //            self.lsStatus.push(new Status(3, "Test 3"));
+                    //            self.lsStatus.push(new Status(4, "Test 4"));
                     // End mockup
                 }
                 selectFirst() {

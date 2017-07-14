@@ -18,7 +18,7 @@
         <property generated="never" lazy="false" name="SFlg" optimistic-lock="true" type="byte" unique="false">
             <column name="s_flg" not-null="true"/>
         </property>
-        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="projects" optimistic-lock="true" sort="unsorted" table="project">
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="projects" optimistic-lock="true" sort="unsorted" table="project">
             <key on-delete="noaction">
                 <column name="pj_status"/>
             </key>
