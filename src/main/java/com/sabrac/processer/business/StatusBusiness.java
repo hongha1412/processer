@@ -16,4 +16,5 @@ public interface StatusBusiness {
 
     public List<Status> getListStatus();
     public StatusVO convertToVO(Status status);
+    public boolean addStatus(StatusVO statusVO);
 }

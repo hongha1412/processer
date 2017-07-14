@@ -18,8 +18,11 @@
 <link rel="stylesheet" type="text/css" href="css/maps/jquery-jvectormap-2.0.3.css" />
 <link href="css/icheck/flat/green.css" rel="stylesheet" />
 <link href="css/floatexamples.css" rel="stylesheet" type="text/css" />
+<link href="css/themes/infragistics/infragistics.theme.css" rel="stylesheet" />
+<link href="css/structure/infragistics.css" rel="stylesheet" />
 
 <script src="js/jquery.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
 <script src="js/nprogress.js"></script>
 <script src="js/knockout-3.4.0.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -57,7 +60,15 @@
 <script type="text/javascript" src="js/flot/jquery.flot.stack.js"></script>
 <script type="text/javascript" src="js/flot/curvedLines.js"></script>
 <script type="text/javascript" src="js/flot/jquery.flot.resize.js"></script>
-<script src="js/require.js"></script>
+<script src="js/modernizr-2.8.3.js"></script>
+<script src="js/infragistics.core.js"></script>
+<script src="js/infragistics.lob.js"></script>
+<script src="js/infragistics.ui.editors.knockout-extensions.js"></script>
+<script src="js/infragistics.ui.tree.knockout-extensions.js"></script>
+<script src="js/knockout.mapping.min.js" type="text/javascript"></script>
+<script src="js/infragistics.datasource.knockoutjs.js"></script>
+<script src="js/infragistics.ui.grid.knockout-extensions.js"></script>
+<!-- <script src="js/require.js"></script> -->
 <script src="pagejs/utils.js"></script>
 
 <!--[if lt IE 9]>

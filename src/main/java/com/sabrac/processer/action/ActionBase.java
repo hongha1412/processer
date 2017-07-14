@@ -41,7 +41,13 @@ public abstract class ActionBase<T> extends ActionSupport {
     public T parseVO(JsonObject data, Class<T> clazz) throws InstantiationException, IllegalAccessException {
         Object result = clazz.newInstance();
         data.keySet().stream().forEach(x -> {
-            ProcesserUtils.set(result, x, data.get(x).getAsString());
+//        for (String x : data.keySet()) {
+            if (data.get(x).isJsonNull()) {
+                ProcesserUtils.set(result, x, null);
+            } else {
+                ProcesserUtils.set(result, x, data.get(x).getAsString());
+            }
+//        }
         });
         return (T) result;
     }

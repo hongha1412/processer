@@ -52,4 +52,20 @@ public class StatusBusinessImpl implements StatusBusiness {
         return statusVO;
     }
 
+    /* (non-Javadoc)
+     * @see com.sabrac.processer.business.StatusBusiness#addStatus(com.sabrac.processer.model.Status)
+     */
+    @Override
+    public boolean addStatus(StatusVO statusVO) {
+        try {
+            Status status = new Status();
+            status.setSName(statusVO.getStatusName());
+            statusDAO.persist(status);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

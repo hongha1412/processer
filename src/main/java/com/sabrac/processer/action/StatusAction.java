@@ -12,6 +12,7 @@ import com.opensymphony.xwork2.Action;
 import com.sabrac.processer.business.StatusBusiness;
 import com.sabrac.processer.business.UserBusiness;
 import com.sabrac.processer.model.User;
+import com.sabrac.processer.utils.ProcesserUtils;
 import com.sabrac.processer.vo.StatusVO;
 
 import lombok.Setter;
@@ -44,23 +45,30 @@ public class StatusAction extends ActionBase<StatusVO> {
         HttpServletRequest request = ServletActionContext.getRequest();
         // Create VO object
         statusVO = new StatusVO();
+        // Parse requested data to VO
+        statusVO = this.parseVO(ProcesserUtils.parseRequest(request), StatusVO.class);
 
-        // Check if login user info exists in session
-        if (request.getSession().getAttribute("loginUser") != null) {
-            // Get user info from session
-            user = (User)request.getSession().getAttribute("loginUser");
-        }
-        // If user info exists
-        if (user != null && user.getUUsername() != null) {
-            // Set result to VO
-            statusVO.setUserName(user.getUUsername());
-        } else {
-            // Return to view if not logged in
+        // Check requested function
+        if (statusVO.getFunction().equals("init")) {
+            // Check if login user info exists in session
+            if (request.getSession().getAttribute("loginUser") != null) {
+                // Get user info from session
+                user = (User)request.getSession().getAttribute("loginUser");
+            }
+            // If user info exists
+            if (user != null && user.getUUsername() != null) {
+                // Set result to VO
+                statusVO.setUserName(user.getUUsername());
+            } else {
+                // Return to view if not logged in
+                this.setResult(new Gson().toJson(statusVO));
+                return Action.SUCCESS;
+            }
+            // Set result VO
             this.setResult(new Gson().toJson(statusVO));
-            return Action.SUCCESS;
+        } else if (statusVO.getFunction().equals("new")) {
+            statusBusiness.addStatus(statusVO);
         }
-        // Set result VO
-        this.setResult(new Gson().toJson(statusVO));
         return Action.SUCCESS;
     }
 

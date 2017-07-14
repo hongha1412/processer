@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="pagecss/newproject.css" type="text/css" />
     <script src="pagejs/newproject.js"></script>
   </head>
-  <body class="nav-md">
+  <body class="nav-md" style="display: none;" data-bind="visible: true">
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">

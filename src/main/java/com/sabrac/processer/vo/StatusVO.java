@@ -23,7 +23,9 @@ public class StatusVO extends ManagerBaseVO implements Serializable {
      * 
      */
     private static final long serialVersionUID = -2074637264868883650L;
-    private int statusId;
+    private Integer statusId;
     private String statusName;
     private List<Status> lsStatus;
+    private String function;
+    private boolean actionResult;
 }

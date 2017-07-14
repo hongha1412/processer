@@ -31,14 +31,6 @@ var com;
                 }
             }
             processer.NewProjectScreenModel = NewProjectScreenModel;
-            class Status {
-                constructor() {
-                    var self = this;
-                    self.statusId = ko.observable(-1);
-                    self.statusName = ko.observable("");
-                }
-            }
-            processer.Status = Status;
             $(document).ready(function () {
                 var screenModel = new NewProjectScreenModel();
                 $.blockUI();
