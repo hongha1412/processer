@@ -53,17 +53,61 @@ public class StatusBusinessImpl implements StatusBusiness {
     }
 
     /* (non-Javadoc)
+     * @see com.sabrac.processer.business.StatusBusiness#convertToModel(com.sabrac.processer.vo.StatusVO)
+     */
+    @Override
+    public Status convertToModel(StatusVO statusVO) {
+        Status rs = new Status();
+        rs.setSId(statusVO.getStatusId());
+        // Default enable
+        rs.setSFlg((byte)0);
+        rs.setSName(statusVO.getStatusName());
+        // Default not custom
+        rs.setSCustom("");
+        // Default type 0 => not dev yet
+        rs.setSType(0);
+        return rs;
+    }
+
+    /* (non-Javadoc)
      * @see com.sabrac.processer.business.StatusBusiness#addStatus(com.sabrac.processer.model.Status)
      */
     @Override
-    public boolean addStatus(StatusVO statusVO) {
+    public Integer addStatus(StatusVO statusVO) {
         try {
-            Status status = new Status();
-            status.setSName(statusVO.getStatusName());
+            Status status = this.convertToModel(statusVO);
             statusDAO.persist(status);
-            return true;
+            return status.getSId();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return null;
+    }
+
+    /* (non-Javadoc)
+     * @see com.sabrac.processer.business.StatusBusiness#updateStatus(com.sabrac.processer.vo.StatusVO)
+     */
+    @Override
+    public boolean updateStatus(StatusVO statusVO) {
+        // Get status from vo
+        Status status = this.convertToModel(statusVO);
+        status = statusDAO.merge(status);
+        if (status != null && status.getSId() >= 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /* (non-Javadoc)
+     * @see com.sabrac.processer.business.StatusBusiness#deleteStatus(com.sabrac.processer.vo.StatusVO)
+     */
+    @Override
+    public boolean deleteStatus(StatusVO statusVO) {
+        // Get status from vo
+        Status status = this.convertToModel(statusVO);
+        if (statusDAO.findById(status.getSId()) != null) {
+            statusDAO.delete(status);
+            return true;
         }
         return false;
     }

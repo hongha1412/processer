@@ -3,13 +3,16 @@
  */
 package com.sabrac.processer.action;
 
+import java.lang.reflect.InvocationTargetException;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.struts2.ServletActionContext;
 
 import com.google.gson.JsonObject;
 import com.opensymphony.xwork2.ActionSupport;
-import com.sabrac.processer.utils.ProcesserUtils;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -36,19 +39,19 @@ public abstract class ActionBase<T> extends ActionSupport {
      * @return VO
      * @throws InstantiationException
      * @throws IllegalAccessException
+     * @throws InvocationTargetException 
+     * @throws NoSuchMethodException 
      */
     @SuppressWarnings("unchecked")
-    public T parseVO(JsonObject data, Class<T> clazz) throws InstantiationException, IllegalAccessException {
+    public T parseVO(JsonObject data, Class<T> clazz) throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         Object result = clazz.newInstance();
-        data.keySet().stream().forEach(x -> {
-//        for (String x : data.keySet()) {
+        for (String x : data.keySet()) {
             if (data.get(x).isJsonNull()) {
-                ProcesserUtils.set(result, x, null);
+                PropertyUtils.setProperty(result, x, null);
             } else {
-                ProcesserUtils.set(result, x, data.get(x).getAsString());
+                BeanUtils.setProperty(result, x, data.get(x).getAsString());
             }
-//        }
-        });
+        }
         return (T) result;
     }
 

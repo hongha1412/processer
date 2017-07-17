@@ -38,7 +38,7 @@ module com.sabrac.processer {
                     self.userName(data.userName);
                 }
                 self.listStatus().loadData(data.lsStatus);
-                dfd.resolve(self.listStatus());
+                dfd.resolve(self.listStatus().lsStatus());
             }).fail(function(data) {
                 Utils.notification("Error", "Unexpected error occur", NotiType.ERROR);
                 dfd.resolve();
@@ -48,6 +48,7 @@ module com.sabrac.processer {
 
         submit() {
             var self = this;
+            $.blockUI();
             var functionName = "new";
             if (!self.isNew()) {
                 functionName = "update";
@@ -59,8 +60,11 @@ module com.sabrac.processer {
             }
             Utils.postData("statusService.do", data).done(function(data) {
                 self.listStatus().loadData(data.lsStatus);
+                self.listStatus().select(data.statusId);
+                $.unblockUI();
             }).fail(function(data) {
                 Utils.notification("Error", "Unexpected error occur", NotiType.ERROR);
+                $.unblockUI();
             });
         }
 
@@ -68,6 +72,7 @@ module com.sabrac.processer {
             var self = this;
             self.isNew(true);
             self.clear();
+            $("#status_list").igGridSelection("clearSelection");
         }
 
         clear() {
@@ -76,6 +81,23 @@ module com.sabrac.processer {
                 self.statusId(null);
             }
             self.statusName("");
+        }
+
+        deleteStatus() {
+            var self = this;
+            $.blockUI();
+            var data = {
+                "function": "delete",
+                "statusId": self.statusId()
+            }
+            Utils.postData("statusService.do", data).done(function(data) {
+                self.listStatus().loadData(data.lsStatus);
+                self.listStatus().selectFirst();
+                $.unblockUI();
+            }).fail(function(data) {
+                Utils.notification("Error", "Unexpected error occur", NotiType.ERROR);
+                $.unblockUI();
+            });
         }
     }
 
@@ -88,6 +110,9 @@ module com.sabrac.processer {
             self.lsStatus = ko.observableArray<Status>([]);
             self.selectionChanged = function(evt: any, ui: any) {
                 var rowData = ui.row;
+                if (self.lsStatus().length <= 0) {
+                    return;
+                }
                 statusListScreenModel.isNew(false);
                 var selectedStatus = ko.utils.arrayFirst(self.lsStatus(), function(item: Status) {
                     return item.statusId() === rowData.id;
@@ -100,18 +125,11 @@ module com.sabrac.processer {
         loadData(lsStatus: any[]) {
             var self = this;
             self.lsStatus([]);
-            $.each(lsStatus, function(statusItem: any) {
-                self.lsStatus.push(new Status(statusItem.SId, statusItem.SName));
+            lsStatus.forEach(function(statusItem: any) {
+                if (statusItem.SId && statusItem.SName) {
+                    self.lsStatus.push(new Status(statusItem.SId, statusItem.SName));
+                }
             });
-            $("#list_status").igGrid("dataSourceObject", self.lsStatus());
-            $("#list_status").igGrid("dataBind");
-            // Mockup data
-//            self.lsStatus.push(new Status(0, "Test 0"));
-//            self.lsStatus.push(new Status(1, "Test 1"));
-//            self.lsStatus.push(new Status(2, "Test 2"));
-//            self.lsStatus.push(new Status(3, "Test 3"));
-//            self.lsStatus.push(new Status(4, "Test 4"));
-            // End mockup
         }
 
         selectFirst() {
@@ -119,19 +137,33 @@ module com.sabrac.processer {
             if (self.lsStatus().length > 0) {
                 var selectedId = self.lsStatus()[0].statusId();
                 self.select(selectedId);
-                self.selectionChanged(null, {row: {id: selectedId}});
             }
         }
 
         select(statusId: number) {
             var self = this;
             if ($("#status_list").data("igGrid") != null) {
+                self.goToPageWithId(statusId);
                 var rows = $("#status_list").igGrid("rows");
                 $(rows).each(function(index, el){
-                    if ($(el).attr("data-id") == (statusId + ""))
+                    if ($(el).attr("data-id") == (statusId + "")) {
                         $("#status_list").igGridSelection("selectRow", index);
+                        self.selectionChanged(null, {row: {id: statusId}});
+                    }
                 });
             }
+        }
+
+        goToPageWithId(id: number) {
+            var self = this;
+            let currIndex = 0;
+            self.lsStatus().forEach(function(status: Status, index: number) {
+                if (status.statusId() == id) {
+                    currIndex = index;
+                }
+            });
+            let newPageIndex = Math.floor(currIndex / $("#status_list").igGridPaging("pageSize"));
+            $("#status_list").igGridPaging("pageIndex", newPageIndex);
         }
     }
 

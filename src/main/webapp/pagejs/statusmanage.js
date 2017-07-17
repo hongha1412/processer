@@ -33,7 +33,7 @@ var com;
                             self.userName(data.userName);
                         }
                         self.listStatus().loadData(data.lsStatus);
-                        dfd.resolve(self.listStatus());
+                        dfd.resolve(self.listStatus().lsStatus());
                     }).fail(function (data) {
                         processer.Utils.notification("Error", "Unexpected error occur", processer.NotiType.ERROR);
                         dfd.resolve();
@@ -42,6 +42,7 @@ var com;
                 }
                 submit() {
                     var self = this;
+                    $.blockUI();
                     var functionName = "new";
                     if (!self.isNew()) {
                         functionName = "update";
@@ -53,14 +54,18 @@ var com;
                     };
                     processer.Utils.postData("statusService.do", data).done(function (data) {
                         self.listStatus().loadData(data.lsStatus);
+                        self.listStatus().select(data.statusId);
+                        $.unblockUI();
                     }).fail(function (data) {
                         processer.Utils.notification("Error", "Unexpected error occur", processer.NotiType.ERROR);
+                        $.unblockUI();
                     });
                 }
                 newStatus() {
                     var self = this;
                     self.isNew(true);
                     self.clear();
+                    $("#status_list").igGridSelection("clearSelection");
                 }
                 clear() {
                     var self = this;
@@ -68,6 +73,22 @@ var com;
                         self.statusId(null);
                     }
                     self.statusName("");
+                }
+                deleteStatus() {
+                    var self = this;
+                    $.blockUI();
+                    var data = {
+                        "function": "delete",
+                        "statusId": self.statusId()
+                    };
+                    processer.Utils.postData("statusService.do", data).done(function (data) {
+                        self.listStatus().loadData(data.lsStatus);
+                        self.listStatus().selectFirst();
+                        $.unblockUI();
+                    }).fail(function (data) {
+                        processer.Utils.notification("Error", "Unexpected error occur", processer.NotiType.ERROR);
+                        $.unblockUI();
+                    });
                 }
             }
             processer.StatusListScreenModel = StatusListScreenModel;
@@ -77,6 +98,9 @@ var com;
                     self.lsStatus = ko.observableArray([]);
                     self.selectionChanged = function (evt, ui) {
                         var rowData = ui.row;
+                        if (self.lsStatus().length <= 0) {
+                            return;
+                        }
                         statusListScreenModel.isNew(false);
                         var selectedStatus = ko.utils.arrayFirst(self.lsStatus(), function (item) {
                             return item.statusId() === rowData.id;
@@ -88,36 +112,42 @@ var com;
                 loadData(lsStatus) {
                     var self = this;
                     self.lsStatus([]);
-                    $.each(lsStatus, function (statusItem) {
-                        self.lsStatus.push(new Status(statusItem.SId, statusItem.SName));
+                    lsStatus.forEach(function (statusItem) {
+                        if (statusItem.SId && statusItem.SName) {
+                            self.lsStatus.push(new Status(statusItem.SId, statusItem.SName));
+                        }
                     });
-                    $("#list_status").igGrid("dataSourceObject", self.lsStatus());
-                    $("#list_status").igGrid("dataBind");
-                    // Mockup data
-                    //            self.lsStatus.push(new Status(0, "Test 0"));
-                    //            self.lsStatus.push(new Status(1, "Test 1"));
-                    //            self.lsStatus.push(new Status(2, "Test 2"));
-                    //            self.lsStatus.push(new Status(3, "Test 3"));
-                    //            self.lsStatus.push(new Status(4, "Test 4"));
-                    // End mockup
                 }
                 selectFirst() {
                     var self = this;
                     if (self.lsStatus().length > 0) {
                         var selectedId = self.lsStatus()[0].statusId();
                         self.select(selectedId);
-                        self.selectionChanged(null, { row: { id: selectedId } });
                     }
                 }
                 select(statusId) {
                     var self = this;
                     if ($("#status_list").data("igGrid") != null) {
+                        self.goToPageWithId(statusId);
                         var rows = $("#status_list").igGrid("rows");
                         $(rows).each(function (index, el) {
-                            if ($(el).attr("data-id") == (statusId + ""))
+                            if ($(el).attr("data-id") == (statusId + "")) {
                                 $("#status_list").igGridSelection("selectRow", index);
+                                self.selectionChanged(null, { row: { id: statusId } });
+                            }
                         });
                     }
+                }
+                goToPageWithId(id) {
+                    var self = this;
+                    let currIndex = 0;
+                    self.lsStatus().forEach(function (status, index) {
+                        if (status.statusId() == id) {
+                            currIndex = index;
+                        }
+                    });
+                    let newPageIndex = Math.floor(currIndex / $("#status_list").igGridPaging("pageSize"));
+                    $("#status_list").igGridPaging("pageIndex", newPageIndex);
                 }
             }
             processer.ListStatus = ListStatus;

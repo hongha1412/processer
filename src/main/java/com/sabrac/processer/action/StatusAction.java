@@ -65,10 +65,41 @@ public class StatusAction extends ActionBase<StatusVO> {
                 return Action.SUCCESS;
             }
         } else if (statusVO.getFunction().equals("new")) {
-            statusBusiness.addStatus(statusVO);
+            Integer insertedId = statusBusiness.addStatus(statusVO);
             // Clear statusVO data
             statusVO = new StatusVO();
+            // Set new Id into VO
+            if (insertedId != null && insertedId >= 0) {
+                statusVO.setStatusId(insertedId);
+            }
+        } else if (statusVO.getFunction().equals("update")) {
+            boolean rs = statusBusiness.updateStatus(statusVO);
+            int updateId = statusVO.getStatusId();
+            // Clear statusVO data
+            statusVO = new StatusVO();
+            statusVO.setStatusId(updateId);
+
+            if (rs) {
+                // Set action result to success
+                statusVO.setActionResult(true);
+            } else {
+                // Set action result to fail
+                statusVO.setActionResult(false);
+            }
+        } else if (statusVO.getFunction().equals("delete")) {
+            if (statusBusiness.deleteStatus(statusVO)) {
+                // Clear statusVO data
+                statusVO = new StatusVO();
+                // Set action result to success
+                statusVO.setActionResult(true);
+            } else {
+                // Clear statusVO data
+                statusVO = new StatusVO();
+                // Set action result to fail
+                statusVO.setActionResult(false);
+            }
         }
+
         // Get list status
         statusVO.setLsStatus(statusBusiness.getListStatus());
         // Set result VO and return to view

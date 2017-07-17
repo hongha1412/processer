@@ -74,13 +74,22 @@
                         ],
                         dataSource: lsStatus,
                         features: [
-                            {name: 'Paging'},
+                            {
+                                name: 'Paging',
+                                pageSize: 10
+                            },
                             {
                                 name: 'Selection',
                                 mode: 'row',
                                 multipleSelection: false,
                                 activation: true,
                                 rowSelectionChanged: selectionChanged
+                            },
+                            {
+                                name: 'Updating',
+                                enableAddRow: false,
+                                enableDeleteRow: false,
+                                editMode: 'none'
                             }
                         ]
                       }">
@@ -106,7 +115,7 @@
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                         <button type="button" data-bind="click: newStatus" class="btn btn-round btn-primary control-button">New</button>
                         <button type="submit" class="btn btn-round btn-success control-button">Submit</button>
-                        <button type="button" data-bind="click: clear" class="btn btn-round btn-warning control-button">Clear</button>
+                        <button type="button" data-bind="click: deleteStatus, enable: !isNew()" class="btn btn-round btn-danger control-button">Delete</button>
                       </div>
                     </div>
                   </form>
