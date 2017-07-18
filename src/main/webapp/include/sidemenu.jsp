@@ -27,6 +27,8 @@
             </li>
             <li><a class="function" href="statusmanage.do">Status Manage</a>
             </li>
+            <li><a class="function" href="typemanage.do">Type Manage</a>
+            </li>
             <li><a class="function" href="newproject.do">Create Project</a>
             </li>
           </ul>

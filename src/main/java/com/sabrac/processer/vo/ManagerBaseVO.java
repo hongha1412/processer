@@ -12,5 +12,7 @@ import lombok.Data;
 @Data
 public class ManagerBaseVO {
 
+    private String function;
     private String userName;
+    private boolean actionResult;
 }

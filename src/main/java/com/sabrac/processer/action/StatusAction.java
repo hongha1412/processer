@@ -11,7 +11,6 @@ import com.google.gson.Gson;
 import com.opensymphony.xwork2.Action;
 import com.sabrac.processer.business.StatusBusiness;
 import com.sabrac.processer.business.UserBusiness;
-import com.sabrac.processer.model.User;
 import com.sabrac.processer.utils.ProcesserUtils;
 import com.sabrac.processer.vo.StatusVO;
 
@@ -39,8 +38,6 @@ public class StatusAction extends ActionBase<StatusVO> {
      */
     @Override
     public String execute() throws Exception {
-        // Declare variable store user info
-        User user = null;
         // Get request from context
         HttpServletRequest request = ServletActionContext.getRequest();
         // Create VO object
@@ -50,20 +47,10 @@ public class StatusAction extends ActionBase<StatusVO> {
 
         // Check requested function
         if (statusVO.getFunction().equals("init")) {
-            // Check if login user info exists in session
-            if (request.getSession().getAttribute("loginUser") != null) {
-                // Get user info from session
-                user = (User)request.getSession().getAttribute("loginUser");
-            }
-            // If user info exists
-            if (user != null && user.getUUsername() != null) {
-                // Set result to VO
-                statusVO.setUserName(user.getUUsername());
-            } else {
-                // Return to view if not logged in
-                this.setResult(new Gson().toJson(statusVO));
-                return Action.SUCCESS;
-            }
+            // Get login info
+            this.setLoginUser(statusVO);
+            // Return to view
+            this.setResult(new Gson().toJson(statusVO));
         } else if (statusVO.getFunction().equals("new")) {
             Integer insertedId = statusBusiness.addStatus(statusVO);
             // Clear statusVO data

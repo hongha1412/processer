@@ -27,6 +27,7 @@
             <result name="login" type="redirect">/login.do</result>
         </global-results>
 
+        <!-- Page view route -->
         <action name="index" class="">
             <interceptor-ref name="defaultStack"></interceptor-ref>
             <result name="success">/index.jsp</result>
@@ -41,7 +42,11 @@
         <action name="statusmanage" class="">
             <result name="success">/statusmanage.jsp</result>
         </action>
+        <action name="typemanage" class="">
+            <result name="success">/typemanage.jsp</result>
+        </action>
 
+        <!-- Page services route -->
         <action name="loginService" class="loginService">
             <result name="success" type="json">
                 <param name="noCache">true</param>
@@ -62,7 +67,15 @@
                 <param name="excludeNullProperties">true</param>
                 <param name="root">result</param>
             </result>
-        </action><action name="statusService" class="statusService">
+        </action>
+        <action name="statusService" class="statusService">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+                <param name="excludeNullProperties">true</param>
+                <param name="root">result</param>
+            </result>
+        </action>
+        <action name="typeService" class="typeService">
             <result name="success" type="json">
                 <param name="noCache">true</param>
                 <param name="excludeNullProperties">true</param>

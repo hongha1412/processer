@@ -5,6 +5,10 @@
   <head>
     <%@ include file="include/header.jsp"%>
     <link rel="stylesheet" href="pagecss/newproject.css" type="text/css" />
+    <!-- select2 -->
+    <link href="css/select/select2.min.css" rel="stylesheet">
+    <!-- select2 -->
+    <script src="js/select/select2.full.js"></script>
     <script src="pagejs/newproject.js"></script>
   </head>
   <body class="nav-md" style="display: none;" data-bind="visible: true">
@@ -60,8 +64,8 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="select2_single form-control" tabindex="-1" data-bind="options: lsProjectStatus,
-                            optionsText: statusName,
-                            optionsValue: statusId,
+                            optionsText: 'statusName',
+                            optionsValue: 'statusId',
                             value: selectedStatus"></select>
                       </div>
                     </div>

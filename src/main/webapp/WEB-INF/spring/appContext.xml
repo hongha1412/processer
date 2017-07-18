@@ -21,6 +21,9 @@
         <property name="userBusiness" ref="userBusiness" />
         <property name="statusBusiness" ref="statusBusiness" />
     </bean>
+    <bean id="typeService" class="com.sabrac.processer.action.TypeAction">
+        <property name="typeBusiness" ref="typeBusiness" />
+    </bean>
 
     <bean id="loginBusiness" class="com.sabrac.processer.business.LoginBusinessImpl">
         <property name="userDAO" ref="userDAO" />
@@ -34,6 +37,9 @@
     <bean id="statusBusiness" class="com.sabrac.processer.business.StatusBusinessImpl">
         <property name="statusDAO" ref="statusDAO" />
     </bean>
+    <bean id="typeBusiness" class="com.sabrac.processer.business.TypeBusinessImpl">
+        <property name="typeDAO" ref="typeDAO" />
+    </bean>
 
     <bean id="userDAO" class="com.sabrac.processer.dao.UserDAOImpl">
         <constructor-arg>
@@ -46,6 +52,11 @@
         </constructor-arg>
     </bean>
     <bean id="statusDAO" class="com.sabrac.processer.dao.StatusDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+    <bean id="typeDAO" class="com.sabrac.processer.dao.TypeDAOImpl">
         <constructor-arg>
             <ref bean="sessionFactory" />
         </constructor-arg>

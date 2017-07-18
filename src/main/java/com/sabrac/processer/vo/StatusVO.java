@@ -26,6 +26,4 @@ public class StatusVO extends ManagerBaseVO implements Serializable {
     private Integer statusId;
     private String statusName;
     private List<Status> lsStatus;
-    private String function;
-    private boolean actionResult;
 }

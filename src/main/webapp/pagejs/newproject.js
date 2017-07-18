@@ -33,6 +33,10 @@ var com;
             processer.NewProjectScreenModel = NewProjectScreenModel;
             $(document).ready(function () {
                 var screenModel = new NewProjectScreenModel();
+                $(".select2_single").select2({
+                    placeholder: "Select Project Status",
+                    width: '100%'
+                });
                 $.blockUI();
                 screenModel.startPage().done(function () {
                     ko.applyBindings(screenModel, $("#html_content")[0]);

@@ -4,7 +4,7 @@
 <html lang="en" id="html_content">
   <head>
     <%@ include file="include/header.jsp"%>
-    <link rel="stylesheet" href="pagecss/statusmanage.css" type="text/css" />
+    <link rel="stylesheet" href="pagecss/typemanage.css" type="text/css" />
     <link href="js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <!-- Datatables-->
         <script src="js/datatables/jquery.dataTables.min.js"></script>
@@ -21,7 +21,7 @@
         <script src="js/datatables/dataTables.responsive.min.js"></script>
         <script src="js/datatables/responsive.bootstrap.min.js"></script>
         <script src="js/datatables/dataTables.scroller.min.js"></script>
-    <script src="pagejs/statusmanage.js"></script>
+    <script src="pagejs/typemanage.js"></script>
   </head>
   <body class="nav-md" style="display: none;" data-bind="visible: true">
     <div class="container body">
@@ -39,7 +39,7 @@
           <div class="row">
             <div class="page-title">
               <div class="title_left">
-                <h3>Status Manage</h3>
+                <h3>Type Manage</h3>
               </div>
               <!-- <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -64,16 +64,16 @@
                 </div> -->
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <form class="form-horizontal form-label-left input_mask" data-bind="submit: submit">
-                    <div class="col-md-6 col-xs-12" data-bind="with: listStatus">
-                      <h4 class="x_title">Status List</h4>
-                      <table id="status_list" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" data-bind="igGrid: {
-                        primaryKey: 'statusId',
+                    <div class="col-md-6 col-xs-12" data-bind="with: listType">
+                      <h4 class="x_title">Type List</h4>
+                      <table id="type_list" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" data-bind="igGrid: {
+                        primaryKey: 'typeId',
                         width: '100%',
                         columns: [
-                            {headerText: 'Status ID', key: 'statusId', dataType: 'number', width: '30%'},
-                            {headerText: 'Status Name', key: 'statusName', dataType: 'string', width: '70%'}
+                            {headerText: 'Type ID', key: 'typeId', dataType: 'number', width: '30%'},
+                            {headerText: 'Type Name', key: 'typeName', dataType: 'string', width: '70%'}
                         ],
-                        dataSource: lsStatus,
+                        dataSource: lsType,
                         features: [
                             {
                                 name: 'Paging',
@@ -97,26 +97,26 @@
                       </table>
                     </div>
                     <div class="col-md-6 col-xs-12" id="status_info">
-                      <h4 class="x_title">Status Information</h4>
+                      <h4 class="x_title">Type Information</h4>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status_id">Status Id 
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="type_id">Type Id 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="status_id" disabled="disabled" data-bind="value: statusId" placeholder="Status Id" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="type_id" disabled="disabled" data-bind="value: typeId" placeholder="Type Id" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status_name">Status Name <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="type_name">Type Name <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="status_name" required="required" data-bind="value: statusName" placeholder="Status Name" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="type_name" required="required" data-bind="value: typeName" placeholder="Type Name" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="ln_solid"></div>
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <button type="button" data-bind="click: newStatus" class="btn btn-round btn-primary control-button">New</button>
+                        <button type="button" data-bind="click: newType" class="btn btn-round btn-primary control-button">New</button>
                         <button type="submit" class="btn btn-round btn-success control-button">Submit</button>
-                        <button type="button" data-bind="click: deleteStatus, enable: !isNew()" class="btn btn-round btn-danger control-button">Delete</button>
+                        <button type="button" data-bind="click: deleteType, enable: !isNew()" class="btn btn-round btn-danger control-button">Delete</button>
                       </div>
                     </div>
                   </form>

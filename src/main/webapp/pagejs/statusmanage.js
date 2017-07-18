@@ -112,11 +112,13 @@ var com;
                 loadData(lsStatus) {
                     var self = this;
                     self.lsStatus([]);
-                    lsStatus.forEach(function (statusItem) {
-                        if (statusItem.SId && statusItem.SName) {
-                            self.lsStatus.push(new Status(statusItem.SId, statusItem.SName));
-                        }
-                    });
+                    if (lsStatus && lsStatus.length > 0) {
+                        lsStatus.forEach(function (statusItem) {
+                            if (statusItem.SId && statusItem.SName) {
+                                self.lsStatus.push(new Status(statusItem.SId, statusItem.SName));
+                            }
+                        });
+                    }
                 }
                 selectFirst() {
                     var self = this;

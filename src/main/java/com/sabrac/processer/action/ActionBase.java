@@ -13,6 +13,8 @@ import org.apache.struts2.ServletActionContext;
 
 import com.google.gson.JsonObject;
 import com.opensymphony.xwork2.ActionSupport;
+import com.sabrac.processer.model.User;
+import com.sabrac.processer.vo.ManagerBaseVO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -70,6 +72,30 @@ public abstract class ActionBase<T> extends ActionSupport {
         }
         // return result
         return loginId < 0 ? false : true;
+    }
+
+    /**
+     * Set logged in user into VO
+     * 
+     * @param baseVO
+     */
+    public void setLoginUser(ManagerBaseVO baseVO) {
+
+        // Declare variable store user info
+        User user = null;
+        // Get request from context
+        HttpServletRequest request = ServletActionContext.getRequest();
+
+        // Check if login user info exists in session
+        if (request.getSession().getAttribute("loginUser") != null) {
+            // Get user info from session
+            user = (User)request.getSession().getAttribute("loginUser");
+        }
+        // If user info exists
+        if (user != null && user.getUUsername() != null) {
+            // Set result to VO
+            baseVO.setUserName(user.getUUsername());
+        }
     }
 
     /* (non-Javadoc)
