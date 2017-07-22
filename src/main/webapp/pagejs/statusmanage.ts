@@ -38,6 +38,9 @@ module com.sabrac.processer {
                     self.userName(data.userName);
                 }
                 self.listStatus().loadData(data.lsStatus);
+                if (self.listStatus().lsStatus().length === 0) {
+                    self.isNew(true);
+                }
                 dfd.resolve(self.listStatus().lsStatus());
             }).fail(function(data) {
                 Utils.notification("Error", "Unexpected error occur", NotiType.ERROR);
@@ -92,12 +95,19 @@ module com.sabrac.processer {
             }
             Utils.postData("statusService.do", data).done(function(data) {
                 self.listStatus().loadData(data.lsStatus);
-                self.listStatus().selectFirst();
+                if (self.listStatus().lsStatus().length > 0) {
+                    self.listStatus().selectFirst();
+                } else {
+                    self.isNew(true);
+                }
+                self.clear();
                 $.unblockUI();
             }).fail(function(data) {
                 Utils.notification("Error", "Unexpected error occur", NotiType.ERROR);
+                self.clear();
                 $.unblockUI();
             });
+            self.clear();
         }
     }
 

@@ -33,6 +33,9 @@ var com;
                             self.userName(data.userName);
                         }
                         self.listStatus().loadData(data.lsStatus);
+                        if (self.listStatus().lsStatus().length === 0) {
+                            self.isNew(true);
+                        }
                         dfd.resolve(self.listStatus().lsStatus());
                     }).fail(function (data) {
                         processer.Utils.notification("Error", "Unexpected error occur", processer.NotiType.ERROR);
@@ -83,12 +86,20 @@ var com;
                     };
                     processer.Utils.postData("statusService.do", data).done(function (data) {
                         self.listStatus().loadData(data.lsStatus);
-                        self.listStatus().selectFirst();
+                        if (self.listStatus().lsStatus().length > 0) {
+                            self.listStatus().selectFirst();
+                        }
+                        else {
+                            self.isNew(true);
+                        }
+                        self.clear();
                         $.unblockUI();
                     }).fail(function (data) {
                         processer.Utils.notification("Error", "Unexpected error occur", processer.NotiType.ERROR);
+                        self.clear();
                         $.unblockUI();
                     });
+                    self.clear();
                 }
             }
             processer.StatusListScreenModel = StatusListScreenModel;

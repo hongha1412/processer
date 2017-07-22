@@ -7,13 +7,13 @@
   <link rel="stylesheet" href="pagecss/index.css" type="text/css" />
   <script src="pagejs/index.js"></script>
 </head>
-<body style="background: #F7F7F7; display: none;" data-bind="visible: true">
+<body style="background: #F7F7F7">
   <div id="wrapper">
     <section class="header">
       <h1><img src="images/Plimo_icon.ico" /> Project Processer</h1>
     </section>
   </div>
-  <div class="right_col" role="main">
+  <div class="right_col" role="main" style="display: none;" data-bind="visible: true">
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="dashboard_graph">

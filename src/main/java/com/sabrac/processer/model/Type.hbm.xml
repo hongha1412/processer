@@ -12,13 +12,13 @@
         <property generated="never" lazy="false" name="TFlg" optimistic-lock="true" type="byte" unique="false">
             <column name="t_flg" not-null="true"/>
         </property>
-        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="projects" optimistic-lock="true" sort="unsorted" table="project">
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="projects" optimistic-lock="true" sort="unsorted" table="project">
             <key on-delete="noaction">
                 <column name="pj_type"/>
             </key>
             <one-to-many class="com.sabrac.processer.model.Project" embed-xml="true" not-found="exception"/>
         </set>
-        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="feedbacks" optimistic-lock="true" sort="unsorted" table="feedback">
+        <set embed-xml="true" fetch="select" inverse="true" lazy="false" mutable="true" name="feedbacks" optimistic-lock="true" sort="unsorted" table="feedback">
             <key on-delete="noaction">
                 <column name="fb_type" not-null="true"/>
             </key>

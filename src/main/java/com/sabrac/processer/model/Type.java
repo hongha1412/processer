@@ -9,6 +9,11 @@ import java.util.Set;
  */
 public class Type implements java.io.Serializable {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -4361723082521239493L;
+
     private Integer TId;
     private String TName;
     private byte TFlg;

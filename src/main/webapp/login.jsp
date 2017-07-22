@@ -9,9 +9,9 @@
   <script src="pagejs/login.js"></script>
 </head>
 
-<body style="background:#F7F7F7; display: none" data-bind="visible: true">
+<body style="background:#F7F7F7">
 
-  <div class="">
+  <div class="" style="display: none;" data-bind="visible: true">
     <a class="hiddenanchor" id="toregister"></a>
     <a class="hiddenanchor" id="tologin"></a>
 

@@ -23,8 +23,8 @@
         <script src="js/datatables/dataTables.scroller.min.js"></script>
     <script src="pagejs/statusmanage.js"></script>
   </head>
-  <body class="nav-md" style="display: none;" data-bind="visible: true">
-    <div class="container body">
+  <body class="nav-md">
+    <div class="container body" style="display: none;" data-bind="visible: true">
       <div class="main_container">
         <div class="col-md-3 left_col">
           <%@ include file="include/sidemenu.jsp"%>

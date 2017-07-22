@@ -49,8 +49,6 @@ public class StatusAction extends ActionBase<StatusVO> {
         if (statusVO.getFunction().equals("init")) {
             // Get login info
             this.setLoginUser(statusVO);
-            // Return to view
-            this.setResult(new Gson().toJson(statusVO));
         } else if (statusVO.getFunction().equals("new")) {
             Integer insertedId = statusBusiness.addStatus(statusVO);
             // Clear statusVO data

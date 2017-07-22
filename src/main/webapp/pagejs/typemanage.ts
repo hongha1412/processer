@@ -37,12 +37,38 @@ module com.sabrac.processer {
                 if (data && data.userName) {
                     self.userName(data.userName);
                 }
-                dfd.resolve(self.userName());
+                self.listType().loadData(data.lsType);
+                if (self.listType().lsType().length === 0) {
+                    self.isNew(true);
+                }
+                dfd.resolve(self.listType());
             }).fail(function(data) {
                 Utils.notification("Error", "Unexpected error occur", NotiType.ERROR);
                 dfd.resolve();
             });
             return dfd.promise();
+        }
+
+        submit() {
+            var self = this;
+            $.blockUI();
+            var functionName = "new";
+            if (!self.isNew()) {
+                functionName = "update";
+            }
+            var data = {
+                "function": functionName,
+                "typeId": self.typeId(),
+                "typeName": self.typeName()
+            }
+            Utils.postData("typeService.do", data).done(function(data) {
+                self.listType().loadData(data.lsType);
+                self.listType().select(data.typeId);
+                $.unblockUI();
+            }).fail(function(data) {
+                Utils.notification("Error", "Unexpected error occur", NotiType.ERROR);
+                $.unblockUI();
+            });
         }
 
         newType() {
@@ -69,10 +95,16 @@ module com.sabrac.processer {
             }
             Utils.postData("typeService.do", data).done(function(data) {
                 self.listType().loadData(data.lsType);
-                self.listType().selectFirst();
+                if (self.listType().lsType().length > 0) {
+                    self.listType().selectFirst();
+                } else {
+                    self.isNew(true);
+                }
+                self.clear();
                 $.unblockUI();
             }).fail(function(data) {
                 Utils.notification("Error", "Unexpected error occur", NotiType.ERROR);
+                self.clear();
                 $.unblockUI();
             });
         }
@@ -162,6 +194,7 @@ module com.sabrac.processer {
         $.blockUI();
         screenModel.startPage().done(function() {
             ko.applyBindings(screenModel, $("#html_content")[0]);
+            screenModel.listType().selectFirst();
             $.unblockUI(); 
         });
     });

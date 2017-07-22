@@ -3,6 +3,8 @@ package com.sabrac.processer.dao;
 
 import java.util.List;
 import javax.naming.InitialContext;
+import javax.transaction.Transactional;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
@@ -17,11 +19,16 @@ import static org.hibernate.criterion.Example.create;
  * @see com.sabrac.processer.model.Type
  * @author Hibernate Tools
  */
+@Transactional
 public class TypeDAOImpl implements TypeDAO {
 
     private static final Log log = LogFactory.getLog(TypeDAOImpl.class);
 
-    private final SessionFactory sessionFactory = getSessionFactory();
+    private SessionFactory sessionFactory;
+
+    public TypeDAOImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     protected SessionFactory getSessionFactory() {
         try {

@@ -76,6 +76,8 @@ public class StatusBusinessImpl implements StatusBusiness {
     public Integer addStatus(StatusVO statusVO) {
         try {
             Status status = this.convertToModel(statusVO);
+            // Clear id for auto increment
+            status.setSId(null);
             statusDAO.persist(status);
             return status.getSId();
         } catch (Exception e) {

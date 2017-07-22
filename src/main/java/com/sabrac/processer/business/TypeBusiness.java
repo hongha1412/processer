@@ -18,6 +18,6 @@ public interface TypeBusiness {
     public TypeVO convertToVO(Type status);
     public Type convertToModel(TypeVO typeVO);
     public Integer addType(TypeVO typeVO);
-    public boolean updatetype(TypeVO typeVO);
-    public boolean deletetype(TypeVO typeVO);
+    public boolean updateType(TypeVO typeVO);
+    public boolean deleteType(TypeVO typeVO);
 }
